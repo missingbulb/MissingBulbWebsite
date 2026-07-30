@@ -1,0 +1,44 @@
+{
+  "packs": [
+    "basics",
+    {
+      "id": "barriers",
+      "via": [
+        "basics"
+      ]
+    },
+    {
+      "id": "git-github",
+      "via": [
+        "basics"
+      ]
+    },
+    "grow_with_claudinite",
+    "tidy-repo",
+    "html",
+    {
+      "id": "product-wiki",
+      "answers": {
+        "product": "A static commercial website for Missing Bulb. It boasts about our projects, all of them in GitHub. We also do software, management, and AI consulting (and also AI Software Management consulting).",
+        "users": "People interested in the services of a software consultancy firm, about AI, about software development life cycle. and people who are interested in the projects that we build in Missing Bulb. It's hard to define because the audience is wide, so make sure you don't research the entire world.",
+        "market": "Software, management, and AI consulting — including AI Software Management consulting. Competitor set not yet named."
+      }
+    },
+    "github-actions"
+  ],
+  "maintenance": {
+    "delivery": "auto-merge"
+  },
+  "taskScheduler": {
+    "dailyHour": 4,
+    "weeklyDay": "Sun",
+    "monthlyDay": 1
+  },
+  "claudinite": {
+    "updated": "2026-07-30T12:05:12.673Z",
+    "ref": "e80b6722a61e1f80c8fcc3be57075496fa1dc37a"
+  },
+  "badges": {
+    "readme": "auto"
+  }
+}
