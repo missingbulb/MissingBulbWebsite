@@ -24,7 +24,8 @@
         "market": "Software, management, and AI consulting — including AI Software Management consulting. Competitor set not yet named."
       }
     },
-    "github-actions"
+    "github-actions",
+    "local/session-tooling"
   ],
   "maintenance": {
     "delivery": "auto-merge"
