@@ -41,10 +41,11 @@ Promoted by the owner in session on 2026-07-30 (issue #15), distilled from the
    small team, hands-on building, working software in weeks, scoped
    engagements. No published pricing — the call to action is "get in touch".
 5. **State experience directly; never imply it.** A who-we-are section names
-   founder Ariel Raunstien with facts from his public profile (roles at Google
-   and Google for Startups Israel, and Paidy; a CS degree), linking his
-   LinkedIn. No invented credentials; the site's claims must match what a
-   visitor finds when they check.
+   founder Ariel Raunstien and links his LinkedIn profile, which carries the
+   detail. Specific credentials appear on the site only when the owner supplies
+   them — third-party aggregator listings proved unreliable and must not be
+   used as a source. The site's claims must match what a visitor finds when
+   they check.
 6. **A real contact channel:** contact@missingbulb.com.
 7. **Exclusions.** No market-size figures, no testimonials or case studies
    until a real one exists, no breadth-of-engineering claims beyond what the
