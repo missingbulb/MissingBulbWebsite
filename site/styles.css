@@ -1,0 +1,208 @@
+/* Missing Bulb — site styles. Hand-authored, no build step. */
+
+:root {
+  --bg: #fffdf7;
+  --surface: #ffffff;
+  --text: #2b2620;
+  --muted: #6b6257;
+  --accent: #b8860b;
+  --accent-strong: #8a6508;
+  --border: #e8e0d2;
+  --shadow: 0 1px 3px rgba(43, 38, 32, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1914;
+    --surface: #26221b;
+    --text: #f0e9dd;
+    --muted: #b0a695;
+    --accent: #f0b429;
+    --accent-strong: #ffd166;
+    --border: #3a342a;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: var(--accent-strong);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--accent);
+}
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+}
+
+.site-header nav {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.brand::before {
+  content: "💡 ";
+}
+
+.site-header ul {
+  list-style: none;
+  display: flex;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.site-header ul a {
+  text-decoration: none;
+}
+
+main {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 0 1.25rem 3rem;
+}
+
+section {
+  padding: 2.5rem 0 0.5rem;
+}
+
+.hero {
+  padding: 4rem 0 2rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  line-height: 1.2;
+  margin: 0 0 1rem;
+}
+
+.tagline {
+  max-width: 42rem;
+  margin: 0 auto 1.75rem;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.button:hover,
+.button:focus-visible {
+  background: var(--accent-strong);
+  color: var(--bg);
+}
+
+.button-secondary {
+  background: transparent;
+  color: var(--accent-strong);
+  border: 1px solid var(--accent);
+}
+
+.button-secondary:hover,
+.button-secondary:focus-visible {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin: 0 0 0.75rem;
+}
+
+.section-lede {
+  color: var(--muted);
+  max-width: 44rem;
+  margin-top: 0;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+}
+
+.project-list {
+  list-style: none;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 1.1rem 1.25rem;
+  box-shadow: var(--shadow);
+}
+
+.card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.card-featured {
+  border-color: var(--accent);
+  grid-column: 1 / -1;
+}
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 1.25rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
