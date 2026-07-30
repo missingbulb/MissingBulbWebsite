@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Missing Bulb — Software, Management &amp; AI Consulting</title>
-  <meta name="description" content="Missing Bulb is a software consultancy doing software, management, and AI consulting — including AI Software Management consulting. Everything we build is public on GitHub.">
+  <title>Missing Bulb — AI Software Management Consulting</title>
+  <meta name="description" content="Missing Bulb is a software consultancy specializing in AI Software Management: running software development where AI agents do the engineering, governed by shared guidelines and automated checks. We also do software, management, and AI consulting.">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%A1%3C/text%3E%3C/svg%3E">
 </head>
@@ -13,8 +13,10 @@
     <nav aria-label="Main">
       <a class="brand" href="#top">Missing&nbsp;Bulb</a>
       <ul>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#projects">Projects</a></li>
+        <li><a href="#practice">The practice</a></li>
+        <li><a href="#engagement">How we work</a></li>
+        <li><a href="#code">Code</a></li>
+        <li><a href="#who">Who we are</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -22,111 +24,133 @@
 
   <main id="top">
     <section class="hero">
-      <h1>The bulb you didn't know was missing.</h1>
+      <h1>AI Software Management</h1>
       <p class="tagline">
-        Missing Bulb is a software consultancy. We do software, management,
-        and AI consulting — including <strong>AI&nbsp;Software&nbsp;Management</strong>
-        consulting: helping teams run software development where AI agents do
-        real engineering work.
+        Running software development where AI agents do the engineering —
+        governed by shared guidelines and automated checks, so the work stays
+        fast <em>and</em> trustworthy. That is Missing Bulb's specialty.
+        Around it, we do software, management, and AI consulting.
       </p>
       <p class="hero-actions">
-        <a class="button" href="#projects">See what we build</a>
-        <a class="button button-secondary" href="https://github.com/missingbulb">We're on GitHub</a>
+        <a class="button" href="#practice">See it working</a>
+        <a class="button button-secondary" href="#contact">Get in touch</a>
       </p>
     </section>
 
-    <section id="services" aria-labelledby="services-heading">
-      <h2 id="services-heading">What we do</h2>
+    <section id="practice" aria-labelledby="practice-heading">
+      <h2 id="practice-heading">Not a pitch — a working practice</h2>
+      <p class="section-lede">
+        We don't advise on AI-assisted development from the sidelines. We run
+        our own projects this way, every day.
+      </p>
       <div class="card-grid">
-        <article class="card">
-          <h3>Software consulting</h3>
-          <p>Design, build, and ship. We write working software — web apps,
-            browser extensions, and the tooling around them — and everything we
-            make is public, so you can read the code before you talk to us.</p>
-        </article>
-        <article class="card">
-          <h3>Management consulting</h3>
-          <p>How software teams plan, decide, and deliver. We help you shape
-            the process around the code: what to build, in what order, and how
-            to know it's working.</p>
-        </article>
-        <article class="card">
-          <h3>AI consulting</h3>
-          <p>Practical AI in real products and real workflows — from putting a
-            model behind a feature to putting AI agents to work inside your
-            development process.</p>
-        </article>
         <article class="card card-featured">
-          <h3>AI Software Management consulting</h3>
-          <p>Our specialty: managing software development done <em>with</em> AI.
-            We don't just advise on it — we run our own projects this way, and
-            we built <a href="https://github.com/missingbulb/Claudinite">Claudinite</a>,
-            our open system of shared working guidelines and automated checks
-            that keeps coding agents productive and honest.</p>
+          <h3><a href="https://github.com/missingbulb/Claudinite">Claudinite</a> — the system</h3>
+          <p>Our open-source corpus of working guidelines, skills, and automated
+            conformance checks for AI coding agents. It decides how an agent
+            names things, structures commits, ties work to issues, and what a
+            change must pass before it lands. Every rule is public — you can
+            read exactly how we keep agent-written software honest.</p>
+        </article>
+        <article class="card">
+          <h3>Dogfooded daily</h3>
+          <p>Missing Bulb's own repositories — this website among them — are
+            built and maintained by AI agents working under Claudinite's rules,
+            with automated checks gating every merge.</p>
+        </article>
+        <article class="card">
+          <h3>What we bring to you</h3>
+          <p>The same practice, applied to your team: where agents fit in your
+            development lifecycle, the guardrails that keep their output
+            reviewable, and the process changes that make the speed real.</p>
         </article>
       </div>
     </section>
 
-    <section id="projects" aria-labelledby="projects-heading">
-      <h2 id="projects-heading">Projects we're proud of</h2>
-      <p class="section-lede">All of our work lives in the open, in the
-        <a href="https://github.com/missingbulb">missingbulb GitHub organization</a>.
-        A few highlights:</p>
+    <section id="engagement" aria-labelledby="engagement-heading">
+      <h2 id="engagement-heading">How an engagement runs</h2>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Small and hands-on</h3>
+          <p>You work directly with the people doing the work. No layers, no
+            handoffs, no slide decks standing in for software.</p>
+        </article>
+        <article class="card">
+          <h3>Working software in weeks</h3>
+          <p>Engagements are scoped to deliver something running early — a
+            working system you can react to, not a long discovery phase.</p>
+        </article>
+        <article class="card">
+          <h3>Scoped, not open-ended</h3>
+          <p>We agree on the outcome and the boundaries up front. When the
+            scope is done, the engagement is done.</p>
+        </article>
+      </div>
+      <p class="section-cta"><a class="button" href="#contact">Get in touch</a></p>
+    </section>
+
+    <section id="code" aria-labelledby="code-heading">
+      <h2 id="code-heading">Working code you can read</h2>
+      <p class="section-lede">
+        Our public work is on GitHub — not as a trophy shelf, but so you can
+        read the code and judge the craft before you ever talk to us. A few
+        that show the range:
+      </p>
       <ul class="card-grid project-list">
-        <li class="card card-featured">
-          <h3><a href="https://github.com/missingbulb/Claudinite">Claudinite</a></h3>
-          <p>A shared corpus of working guidelines, skills, and automated checks
-            for AI coding agents — the system behind our AI Software Management
-            practice. This very website is built and maintained under it.</p>
-        </li>
         <li class="card">
-          <h3><a href="https://github.com/missingbulb/TLDR">TLDR</a></h3>
-          <p>Community-generated tl;dr descriptions for any link on the web.</p>
+          <h3><a href="https://github.com/missingbulb/Claudinite">Claudinite</a></h3>
+          <p>Guidelines, skills, and automated checks for AI coding agents.
+            <span class="demonstrates">Shows: the AI Software Management
+            practice itself, as running code.</span></p>
         </li>
         <li class="card">
           <h3><a href="https://github.com/missingbulb/GoogleCalendarEventCreator">Google Calendar Event Creator</a></h3>
           <p>A Chrome extension that turns any webpage describing an event into
-            a Google Calendar event.</p>
+            a Google Calendar event.
+            <span class="demonstrates">Shows: shipping real browser-extension
+            product work.</span></p>
         </li>
         <li class="card">
-          <h3><a href="https://github.com/missingbulb/CrosswordChat">CrosswordChat</a></h3>
-          <p>Conversationalize the NYT Crossword Puzzle.</p>
+          <h3><a href="https://github.com/missingbulb/TLDR">TLDR</a></h3>
+          <p>Community-generated tl;dr descriptions for any link on the web.
+            <span class="demonstrates">Shows: building a community web product
+            end to end.</span></p>
         </li>
         <li class="card">
           <h3><a href="https://github.com/missingbulb/EdFringeNow">EdFringeNow</a></h3>
-          <p>A website to help you find an Edinburgh Fringe show.</p>
-        </li>
-        <li class="card">
-          <h3><a href="https://github.com/missingbulb/ShoutsAndWhispers">Shouts &amp; Whispers</a></h3>
-          <p>A localized communication platform.</p>
-        </li>
-        <li class="card">
-          <h3><a href="https://github.com/missingbulb/VascularColoring">VascularColoring</a></h3>
-          <p>Coloring in the vascular network.</p>
-        </li>
-        <li class="card">
-          <h3><a href="https://github.com/missingbulb/LaughCounter">LaughCounter</a></h3>
-          <p>A thing that listens and counts the laughs.</p>
-        </li>
-        <li class="card">
-          <h3><a href="https://github.com/missingbulb/gRatio">gRatio</a></h3>
-          <p>A small JavaScript project — the code speaks for itself.</p>
+          <p>A website to help you find an Edinburgh Fringe show.
+            <span class="demonstrates">Shows: a focused, useful site shipped
+            fast.</span></p>
         </li>
       </ul>
+      <p>Everything else we build is public too — browse the rest in the
+        <a href="https://github.com/missingbulb">missingbulb GitHub organization</a>.</p>
+    </section>
+
+    <section id="who" aria-labelledby="who-heading">
+      <h2 id="who-heading">Who we are</h2>
+      <p>Missing Bulb is run by
+        <a href="https://www.linkedin.com/in/arielraunstien/">Ariel Raunstien</a>,
+        a software engineer and consultant with a career spanning engineering
+        and startup work — his profile has the detail. Missing Bulb itself is
+        new; the working practice behind it is not.</p>
     </section>
 
     <section id="contact" aria-labelledby="contact-heading">
-      <h2 id="contact-heading">Work with us</h2>
-      <p>The fastest way to see how we work is to read our code. Then come say
-        hello.</p>
+      <h2 id="contact-heading">Get in touch</h2>
+      <p>Tell us what you're building and where AI fits — or where you'd like
+        it to. We'll reply with how we'd approach it.</p>
       <p class="hero-actions">
-        <a class="button" href="https://github.com/missingbulb">github.com/missingbulb</a>
+        <a class="button" href="mailto:contact@missingbulb.com">contact@missingbulb.com</a>
+        <a class="button button-secondary" href="https://github.com/missingbulb">We're on GitHub</a>
       </p>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>© 2026 Missing Bulb · <a href="https://github.com/missingbulb">GitHub</a></p>
+    <p>© 2026 Missing Bulb ·
+      <a href="mailto:contact@missingbulb.com">contact@missingbulb.com</a> ·
+      <a href="https://github.com/missingbulb">GitHub</a></p>
   </footer>
 </body>
 </html>
