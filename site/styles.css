@@ -195,6 +195,17 @@ h2 {
   grid-column: 1 / -1;
 }
 
+.demonstrates {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--accent-strong);
+}
+
+.section-cta {
+  margin-top: 1.5rem;
+}
+
 .site-footer {
   border-top: 1px solid var(--border);
   padding: 1.25rem;
