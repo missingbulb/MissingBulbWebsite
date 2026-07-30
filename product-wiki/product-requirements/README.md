@@ -4,10 +4,12 @@ The human-reviewed sink. Research from the wikis in this tree arrives here only
 by a human's hand; no unattended pass edits this folder. This is the only
 `product-wiki/` content the website's own code and content may build on.
 
-Nothing has been distilled yet — the wikis alongside this file were seeded on
-2026-07-30 and carry no researched findings to promote. What follows is the
-owner's stated intent, recorded so the first growth passes have a frame, not a
-set of reviewed requirements.
+Nothing has been distilled yet. The wikis alongside this file carry cited
+findings as of 2026-07-30, and several of them have direct implications for the
+site — but promoting a finding into a requirement is a human's call, not a
+research pass's, so none has been. What follows is the owner's stated intent,
+recorded so the growth passes have a frame; it is not a set of reviewed
+requirements.
 
 ## Stated intent (owner, at adoption)
 
