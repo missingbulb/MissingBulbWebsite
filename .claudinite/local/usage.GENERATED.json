@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "foldedThrough": null,
+  "runsFoldedThrough": null,
+  "days": {
+    "2026-07-30": {
+      "captures": 3,
+      "merges": 1,
+      "sessions": 1,
+      "userMessages": 3,
+      "userCommands": 0,
+      "skillLoads": {
+        "merge-to-main": 1
+      },
+      "checks": {
+        "work": {
+          "runs": 4,
+          "failures": 1,
+          "errors": 0,
+          "blocking": 1,
+          "advisory": 0,
+          "ciRuns": 0,
+          "ciFailures": 0
+        },
+        "world": {
+          "runs": 6,
+          "failures": 1,
+          "errors": 0,
+          "blocking": 1,
+          "advisory": 9,
+          "ciRuns": 0,
+          "ciFailures": 0
+        }
+      },
+      "checkFindings": {
+        "claudinite-isolation": {
+          "blocking": 1,
+          "advisory": 0
+        },
+        "comment-classification": {
+          "blocking": 1,
+          "advisory": 0
+        },
+        "file-placement": {
+          "blocking": 0,
+          "advisory": 9
+        }
+      },
+      "tasks": {}
+    }
+  },
+  "weeks": {}
+}
