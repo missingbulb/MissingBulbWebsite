@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy — Missing Bulb</title>
+  <meta name="description" content="Missing Bulb's website counts visits with privacy-first, cookieless analytics — no cookies, no personal data, no cross-site tracking. Here's exactly what's measured.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%A1%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="site-header">
+    <nav aria-label="Main">
+      <a class="brand" href="index.html">Missing&nbsp;Bulb</a>
+      <ul>
+        <li><a href="index.html">← Back to the site</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="legal">
+    <h1>Privacy</h1>
+    <p class="section-lede">The short version: we count visits using
+      privacy-first, cookieless analytics. No cookies, no personal data, no ads,
+      and no following you around the web.</p>
+
+    <h2 id="analytics">Analytics — what we measure</h2>
+    <p>To understand roughly how many people visit, we use
+      <a href="https://www.cloudflare.com/web-analytics/" rel="noopener">Cloudflare
+      Web Analytics</a> — a privacy-first tool chosen precisely because it
+      <strong>doesn't</strong> use cookies, doesn't store personal data, and
+      can't identify you or follow you to other sites. It records anonymous,
+      aggregate signals only: page views, the referring site, and a broad region
+      worked out from your request (your IP address is used to derive that, but
+      is never stored).</p>
+    <p>So this site is <strong>not</strong> analytics-free, and we would rather
+      say so plainly than imply otherwise: we do count visits. What we don't do
+      is build a picture of <em>you</em>. There is no cross-site tracking and no
+      advertising profile — which is also why there's no cookie-consent banner
+      to click through.</p>
+
+    <h2>What we don't do</h2>
+    <p><strong>We don't sell your data, and we don't track you across the
+      web.</strong> No ads, no advertising trackers, no cookies set by us, no
+      accounts and no sign-up.</p>
+
+    <p><strong>This is a static website.</strong> It runs entirely in your
+      browser, with no server of ours behind it — so beyond the anonymous,
+      aggregate analytics described above, there is nothing <em>about you</em>
+      for us to log or keep.</p>
+
+    <h2>What your browser loads</h2>
+    <p>Opening this site fetches the page, its stylesheet, and the privacy-first
+      analytics beacon (a small script) from
+      <a href="https://www.cloudflare.com/web-analytics/" rel="noopener">Cloudflare</a>.
+      That service sees your IP address and browser as part of a normal web
+      request, the same as visiting any website.</p>
+
+    <h2>Links out</h2>
+    <p>Links to GitHub and LinkedIn open those sites. Once you follow a link,
+      that site's own privacy policy applies — not this one.</p>
+
+    <h2>Email</h2>
+    <p>If you email
+      <a href="mailto:contact@missingbulb.com">contact@missingbulb.com</a>, we
+      keep your message so we can reply to it. Nothing more.</p>
+
+    <h2>Questions</h2>
+    <p>Email <a href="mailto:contact@missingbulb.com">contact@missingbulb.com</a>.</p>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Missing Bulb ·
+      <a href="index.html">Home</a> ·
+      <a href="mailto:contact@missingbulb.com">contact@missingbulb.com</a> ·
+      <a href="https://github.com/missingbulb">GitHub</a></p>
+  </footer>
+
+  <!-- Privacy-first, cookieless visitor analytics (see analytics.js) -->
+  <script defer src="analytics.js"></script>
+</body>
+</html>
