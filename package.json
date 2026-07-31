@@ -1,0 +1,10 @@
+{
+  "name": "missingbulb-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Missing Bulb marketing site — static, hand-authored. This file exists to carry the released version; there is no build and no dependency.",
+  "type": "module",
+  "scripts": {
+    "bump-version": "node scripts/bump-version.mjs"
+  }
+}
