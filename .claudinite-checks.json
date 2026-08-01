@@ -27,7 +27,14 @@
     "github-actions",
     "local/session-tooling",
     "local/site-copy",
-    "local/repo-mechanics"
+    "local/repo-mechanics",
+    {
+      "id": "static-website",
+      "answers": {
+        "hosting": "GitHub Pages, from this repo — the existing deploy-pages.yml is an artifact-flow Pages deploy of site/, so the full release-on-push → Pages pipeline applies.",
+        "publish_set": "site/ is the published root: index.html, privacy.html, styles.css and analytics.js. Nothing else in the repo is served — the research trees, scripts and agent tooling stay unpublished."
+      }
+    }
   ],
   "maintenance": {
     "delivery": "auto-merge"
@@ -38,10 +45,7 @@
     "monthlyDay": 1
   },
   "claudinite": {
-    "updated": "2026-08-06T10:56:38.645Z",
-    "ref": "fa7ead79407afb442b2c01276f94b3167d5aade6"
-  },
-  "badges": {
-    "readme": "auto"
+    "updated": "2026-08-06T14:20:43.260Z",
+    "ref": "a05b1c192f1f85c92d6f0f8b0af5c424ef576479"
   }
 }

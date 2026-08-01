@@ -7,8 +7,9 @@
 // every visitor — so it lives in a GitHub Actions *variable* (not a secret):
 //   repo Settings -> Secrets and variables -> Actions -> Variables ->
 //   CLOUDFLARE_ANALYTICS_TOKEN
-// The Pages deploy (.github/workflows/deploy-pages.yml) injects that value into
-// the placeholder below at build time.
+// The release pipeline exports every repo variable into the build environment,
+// and this repo's build_command (.github/site.config) substitutes it into the
+// placeholder below at build time.
 //
 // TO ENABLE: create a free site in the Cloudflare dashboard (Web Analytics ->
 // "Add a site"), then add its token as the CLOUDFLARE_ANALYTICS_TOKEN repo variable.
