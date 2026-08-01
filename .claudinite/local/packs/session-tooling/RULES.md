@@ -55,6 +55,61 @@ one you're going to change, `Read` that exact path before the first `Edit`. Read
 targeted `offset`/`limit` window is enough — the precondition is the tool call, not
 the byte count.
 
+## `enable_pr_auto_merge` cannot be armed in this repo — don't retry it
+
+`main` carries **no branch-protection rule**, and GitHub only offers auto-merge on a
+protected branch. Every task that says "open the PR and arm auto-merge" will fail here
+until an owner adds one.
+
+Worse, the *first* refusal lies about why. One run got
+`The pull request is in unstable status (required checks are failing)` at 05:11:52 while
+the `Claudinite world sweep` check was merely still **queued** — it went green moments
+later. The agent believed the message, re-checked, retried at 05:12:19, and only then got
+the real error: `Protected branch rules not configured for this branch`. ~50s of retries,
+a tracker comment that had to be corrected by a second comment, and an otherwise
+completely successful run converged as `needs-human`.
+
+So: **do not treat "required checks are failing" from `enable_pr_auto_merge` as a check
+failure** — read `pull_request_read` `get_check_runs` and look at `status`, not
+`conclusion`. And do not retry the arm: one refusal mentioning branch protection is
+final. When the task's own spec authorizes landing without human review (the growth
+tasks do), poll `get_check_runs` until the required check *completes* successfully and
+then `merge_pull_request` with `squash`. Escalate `needs-human` only when the task
+requires a reviewer.
+
+## A scheduled executor turn still needs a `Comment class:` line
+
+The `comment-classification` check treats the scheduler's launch prompt
+(`Execute the Claudinite executor: …`) as the owner's latest comment, so **every**
+unattended executor session is one blocking Stop-hook finding away from ending. It fired
+in all three executor sessions captured on 2026-07-31, without exception.
+
+Knowing this costs 7–11 seconds (emit the line, stop again). *Not* knowing it cost one
+session over two minutes of reading `comment-classification.mjs`, `helpers/work.mjs` and
+`helpers/repo-context.mjs` to work out why an automated dispatch was being judged as
+conversation.
+
+So: when the session's opening prompt is a scheduler dispatch, put
+`Comment class: other` in your **first** substantive reply — a command phrase is `other`
+by the rule's own wording. Don't wait for the Stop hook to tell you.
+
+## A subagent shares your working tree — put the branch back before you stop
+
+`Agent` subagents run in the *same* checkout, not a worktree of their own. A subagent that
+does `git checkout` to reach a PR branch silently moves the parent, and the parent's Stop
+hook then evaluates commits that aren't the parent's.
+
+One executor sat on its own branch, dispatched a baselining subagent that checked out
+`claudinite/maintenance-2026-07-31-e7xiad`, and got
+`task-lifecycle: none of the 1 commit(s) since origin/main references an issue (#N)`
+about a commit written by preprocessing, not by it. Two blocked Stop rounds and ~2m40s of
+investigation (05:09:46 → 05:12:25); the fix was one `git checkout` back to its own
+branch, after which the hook passed unchanged.
+
+So: after any subagent that may touch git, run `git branch --show-current` and switch back
+before ending the turn — and read a surprising `task-lifecycle` finding as "am I on the
+branch I think I'm on?" before reading it as a real lifecycle violation.
+
 ## Never publish an unverified fact about a real person
 
 When the primary source for a person's background is blocked, **do not substitute a
