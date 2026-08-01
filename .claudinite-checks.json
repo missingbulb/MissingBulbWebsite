@@ -25,7 +25,8 @@
       }
     },
     "github-actions",
-    "local/session-tooling"
+    "local/session-tooling",
+    "local/site-copy"
   ],
   "maintenance": {
     "delivery": "auto-merge"
