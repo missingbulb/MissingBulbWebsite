@@ -38,6 +38,17 @@ negative keyword search is evidence about the query, not about the environment �
 and handing the owner work the session could have done is the expensive half of
 the mistake.
 
+**`select:` wants the fully-qualified name — for an MCP tool that means the
+`mcp__<server>__` prefix.** `select:issue_read`, `select:pull_request_read` and
+`select:enable_pr_auto_merge` each return `No matching deferred tools found`,
+which reads exactly like an absent tool; `select:mcp__github__issue_read` returns
+it. Three executor sessions on 2026-08-01 hit this six times between them (two in
+session `1fc538f6`, three in `ecc58551`, one in `000d1bf8`), every one recovered
+by a second `ToolSearch` — ~2–4s and a wasted call each, and the usual recovery
+(fall back to a keyword query) pulls back five to ten schemas where the `select:`
+would have pulled one. Copy the prefix off the deferred-tools list rather than
+typing the short name from memory.
+
 ## `Edit` needs the `Read` tool — `cat`/`grep`/`sed` do not count
 
 Inspecting a file through Bash does **not** register it as read. A session that had
@@ -109,6 +120,30 @@ branch, after which the hook passed unchanged.
 So: after any subagent that may touch git, run `git branch --show-current` and switch back
 before ending the turn — and read a surprising `task-lifecycle` finding as "am I on the
 branch I think I'm on?" before reading it as a real lifecycle violation.
+
+## The mounted `.claudinite/shared/` is code without its docs — and its runners are silent when clean
+
+Two ways the engine mount misleads a session that goes reading it, both paid for
+on 2026-08-01:
+
+- **The `DESIGN.md` it cites is not vendored here.** Engine source refers to it
+  constantly (`// World-scope conformance runner (see DESIGN.md)`,
+  `// … (per-project-scheduling DESIGN §1, §5.5)`), but
+  `find .claudinite -iname 'DESIGN*'` returns nothing — the mount carries
+  `.mjs` and pack docs only. Session `000d1bf8` chased it twice independently:
+  the executor spent 05:00:52→05:01:00 on a failed `Read` plus two `find`s, then
+  its subagent repeated the same hunt at 05:02:23→05:02:26. ~25s and five calls
+  for a file that was never there. Read the module header comment instead — it
+  restates what the missing section would have said.
+- **A clean check run prints nothing at all.** `check_the_world.mjs` on a green
+  repo emits zero output and exits `0`; `report-findings.mjs` only prints when
+  there are findings. Session `055f2992` had `EXIT:0` in hand at 05:01:40 and
+  still spent 05:01:42→05:02:12 — four more calls, `--help`, `head`, `tail`,
+  `grep`, a full `Read` — confirming that silence meant success.
+
+So: when the engine's own comments point at a doc, check it exists before
+hunting for it, and re-run a runner with `; echo "EXIT:$?"` **once** — the exit
+code is the whole answer, and no output is the good outcome.
 
 ## Never publish an unverified fact about a real person
 
