@@ -1,7 +1,8 @@
 # The repo's check flow — the deterministic place the whole-repo Claudinite
-# world sweep runs at each change. The site is static and has no test suite of
-# its own yet; when it gains one, add it as a step ahead of the sweep rather
-# than as a separate workflow, so one red flow means one thing.
+# world sweep runs at each change. The site itself is static and still has no
+# test suite; the one test step here is the local packs' check fixtures, and any
+# future site tests join it as further steps ahead of the sweep rather than as a
+# separate workflow, so one red flow means one thing.
 #
 # The WORK scope is deliberately absent here: it judges a session's own change
 # with that session's transcript and runs at the Stop hook, not in CI.
@@ -26,6 +27,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+
+      # A local pack's checks reach every session and every CI run here, so each
+      # ships a red-first fixture (pack.test.mjs) proving it fires on a violating
+      # input and stays quiet on a clean one. They run ahead of the sweep: a
+      # broken check should fail as itself, not as a mystery finding.
+      - name: Local pack check fixtures
+        run: npm test
 
       # The engine's always-vendored Node CLI, invoked as the standalone
       # command — never as a language-specific test file a runner discovers.
