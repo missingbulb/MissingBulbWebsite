@@ -26,7 +26,8 @@
     },
     "github-actions",
     "local/session-tooling",
-    "local/site-copy"
+    "local/site-copy",
+    "local/repo-mechanics"
   ],
   "maintenance": {
     "delivery": "auto-merge"
