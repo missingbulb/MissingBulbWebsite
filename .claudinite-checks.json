@@ -27,7 +27,13 @@
     "github-actions",
     "local/session-tooling",
     "local/site-copy",
-    "local/repo-mechanics"
+    "local/repo-mechanics",
+    {
+      "id": "claude-code-web-users-support",
+      "config": {
+        "repo": "missingbulb/Sheepdog"
+      }
+    }
   ],
   "maintenance": {
     "delivery": "auto-merge"
@@ -38,7 +44,7 @@
     "monthlyDay": 1
   },
   "claudinite": {
-    "updated": "2026-08-07T14:46:55.297Z",
-    "ref": "7bf58aa03f3ea4684aa6777cb7c837293f08cd46"
+    "updated": "2026-08-09T14:11:08.070Z",
+    "ref": "d76c7d9ccb25f2f4f243056686694c9664ec2263"
   }
 }
