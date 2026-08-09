@@ -6,8 +6,9 @@ small firm is read against.
 
 ## Key insights
 
-- AI consulting is roughly $14bn in 2026 and forecast to compound about 26% a year — the category is not saturated.
+- 2026 market-size estimates for AI consulting span $11bn to $39bn — the firms disagree by more than 3x.
 - SMBs are the faster-growing segment, because the Fortune 500 already built internal AI teams.
+- North America is under 40% of the market, so the US-centric sources describe a minority of it.
 - Benchmark pricing for small-business AI work: $5k–$25k per project, or $150–$350 per hour.
 - Outcome-based and capped-budget engagements beat hourly; shipping in weeks beats months of discovery.
 - Nobody sells "AI Software Management" — the recognised neighbours are AI strategy, governance and policy.
@@ -76,18 +77,60 @@ favour a small team over a large one.
 
 ## Market size
 
-The AI consulting services market is put at roughly **$14.1bn in 2026**, growing
-to **$116.81bn by 2035** at a **CAGR of about 26.5%**. The segment detail matters
-more than the headline: **SMB AI consulting is growing at about 25.7% annually,
-outpacing the enterprise segment**, on the reasoning that Fortune 500 companies
-already have internal AI teams while smaller businesses are starting out. A small
-consultancy is therefore aimed at the faster-growing half of a fast-growing
-category — which is a positioning argument the site can legitimately make.
+**Superseded, 2026-08-09.** The previous pass recorded a single headline —
+"roughly **$14.1bn in 2026**, growing to **$116.81bn by 2035** at a **CAGR of about
+26.5%**" — and attributed it to Fortune Business Insights. The re-verification pass
+found two problems with that, and the second one is the actual finding.
+
+First, the attribution was wrong. Fortune Business Insights' current report puts
+the market at **$11.91bn in 2026 growing to $73.89bn by 2034 at a 25.6% CAGR**.
+The $14.08bn / 26.49% pairing that the previous pass rounded to "$14.1bn ... about
+26.5%" belongs to **Business Research Insights**, a different firm. The
+$116.81bn-by-2035 endpoint could not be reproduced from any source found this
+pass and is recorded here as unverified rather than deleted — it may come from a
+report this environment cannot reach.
+
+Second, and more usefully: **the firms do not agree, and not narrowly.** Published
+2026 estimates for the same named market found in this pass:
+
+| Source | 2026 size | Forecast | CAGR |
+| --- | --- | --- | --- |
+| Fortune Business Insights | $11.91bn | $73.89bn by 2034 | 25.6% |
+| Business Research Insights | $14.08bn | — | 26.49% |
+| Market Data Forecast | $30.24bn | $349.80bn by 2034 | 35.8% |
+| MarkWide Research | $38.7bn | $176.96bn by 2035 | 18.40% |
+
+That is a **3.3x spread on the same year's size** and CAGRs from 18.4% to 35.8% —
+a disagreement about what "AI consulting services" even includes, not measurement
+noise. The practical consequence for this page: **no single headline number should
+be quoted from it.** Anything the site says about market size has to be attributed
+to a named firm, or stated as direction only. This is the answer to the standing
+"re-verify at source" question, and it is a more useful answer than a confirmed
+figure would have been.
+
+What survives the spread is the direction, which every source agrees on: a
+low-double-digit-billions category compounding somewhere in the twenties. The
+segment detail also re-confirmed this pass: **SMB AI consulting is growing at
+about 25.7% annually, outpacing the enterprise segment**, on the reasoning that
+Fortune 500 companies already have internal AI teams while smaller businesses are
+starting out. A small consultancy is therefore aimed at the faster-growing half of
+a fast-growing category — which remains a positioning argument the site can
+legitimately make, and it does not depend on which firm's headline is right.
+
+One geographic datum, against this page's standing question about scope: Fortune
+Business Insights puts **North America at 38.13% of the market in 2025**. So the
+US-centricity of every source this wiki has found is not evidence that the market
+is American — North America is the largest single region but still under 40% of
+it, meaning the clear majority of the category sits outside the sources' focus.
+That does not tell us where Missing Bulb sells, but it does mean the sources
+should not be read as describing the whole market.
 
 ## Sources
 
-- [AI Consulting Services Market Size, Share & Growth 2026–2034, Fortune Business Insights](https://www.fortunebusinessinsights.com/ai-consulting-services-market-111179) — market size, forecast and CAGR.
-- [AI Consulting Services Market Size & Growth Report to 2034, MarketsandData Forecast](https://www.marketdataforecast.com/market-reports/ai-consulting-services-market) — corroborating forecast.
+- [AI Consulting Services Market Size, Share & Growth 2026–2034, Fortune Business Insights](https://www.fortunebusinessinsights.com/ai-consulting-services-market-111179) — $11.91bn in 2026 to $73.89bn by 2034 at 25.6% CAGR, and North America at 38.13% share in 2025. Re-checked 2026-08-09; this is *not* the source of the "$14.1bn / 26.5%" figures the first pass attributed to it.
+- [AI Consulting Services Market Size, Trends & Forecast 2026–2035, Business Research Insights](https://www.businessresearchinsights.com/market-reports/ai-consulting-services-market-119843) — $14.08bn in 2026 at 26.49% CAGR: the actual origin of the first pass's headline figures.
+- [AI Consulting Services Market Size & Growth Report to 2034, Market Data Forecast](https://www.marketdataforecast.com/market-reports/ai-consulting-services-market) — the high end of the spread: $30.24bn in 2026 to $349.80bn by 2034 at 35.8% CAGR.
+- [AI Consulting Services Market Size, Share, and Industry Trends Forecast 2026–2036, MarkWide Research](https://markwideresearch.com/ai-consulting-services-market) — $38.7bn in 2026 to $176.96bn by 2035 at 18.40% CAGR; the largest 2026 estimate and the lowest CAGR found.
 - [Artificial Intelligence Services and Consulting, IBM](https://www.ibm.com/consulting/artificial-intelligence) — tier-1 competitor, and category vocabulary.
 - [AI consulting services, RSM US](https://rsmus.com/services/digital-transformation/artificial-intelligence.html) — tier-1 competitor; AI strategy and governance framing.
 - [Artificial Intelligence Consulting, Centric Consulting](https://centricconsulting.com/technology-solutions/artificial-intelligence-consulting/) — mid-market competitor.
@@ -96,24 +139,30 @@ category — which is a positioning argument the site can legitimately make.
 - [Top 10 AI Consulting Companies to Watch in 2026, Binariks](https://binariks.com/blog/top-ai-consulting-firms/) — boutique set, third list.
 - [Cognitive Market Research: AI Consulting Services Market](https://www.cognitivemarketresearch.com/ai-consulting-services-market-report) — third market-sizing source.
 
-**Citation caveat, recorded rather than hidden:** the two market-sizing pages
-return HTTP 403 to this environment's fetcher, so the size, forecast, CAGR,
+**Citation caveat, recorded rather than hidden:** the size, forecast, CAGR,
 segment-growth and pricing figures come from search-result summaries rather than
-from the reports read at source. Vendor-published market forecasts are
-promotional documents and habitually optimistic; the *direction* (a growing
-category, SMB outpacing enterprise) is safer to rely on than the precise
-multiples. Re-verification is in the open questions.
+from the reports read at source. The 2026-08-09 pass corrected the stated cause:
+it is not publisher 403s as first recorded, but this environment's **network
+egress proxy**, which blocks direct fetches of every market-research domain
+listed above. Vendor-published market forecasts are promotional documents and
+habitually optimistic; the 2026-08-09 spread table is the concrete demonstration
+of why the *direction* (a growing category, SMB outpacing enterprise) is the only
+part safe to rely on. The pricing benchmarks ($5k–$25k, $150–$350/hr) were **not**
+re-checked this pass and still rest on the first pass's summaries.
 
 ## Open questions
 
-- Re-verify the market-size, CAGR, segment-growth and pricing figures at source — this pass could not read the primary reports (403).
+- If the site cites a market size at all, whose definition of "AI consulting services" does it adopt? The 3.3x spread across firms makes an unattributed headline number indefensible.
+- Where does the unverified "$116.81bn by 2035" figure come from? No source found this pass reproduces it.
+- Re-verify the pricing benchmarks ($5k–$25k per project, $150–$350 per hour) — untouched since the first pass, and the only remaining figures on this page with a single unchecked origin.
 - Which of the three practices is the realistic wedge, and should the site lead with it rather than list all three?
 - Should the site publish a starting price, given that the category norm is "contact us" and publishing would differentiate?
 - If the site defines "AI Software Management" as a category, what is the one-sentence definition, and does Claudinite anchor it?
 - Who are the *direct* competitors at Missing Bulb's actual size — one-to-five-person firms, not the roundup names?
-- Is there a geographic scope to this? Every source found is US-centric, and the firm's market may not be.
+- Is there a geographic scope to this? Every source found is US-centric — and North America is only 38% of the market, so they describe a minority of it. Where does Missing Bulb actually sell?
 
 ## Growth log
 
 - **2026-07-30** — initial seed at Claudinite adoption. Owner's category framing recorded; competitor set deferred by the owner, so left unnamed.
 - **2026-07-30** — first research pass; named the competitor set, which was this page's highest-value gap. Found it resolves into two tiers rather than one list (global/mid-market generalists vs AI-specialist boutiques) and that boutiques are documented to win on cost, speed and hands-on build — a wedge that fits Missing Bulb's size. Confirmed "AI Software Management" is a coinage against the majors' own service vocabulary, and reframed that as an opportunity given Claudinite already implements what the label names. Added pricing benchmarks, engagement-structure norms and market sizing with SMB segment detail. Flagged the vendor-forecast optimism and the 403 citation caveat rather than presenting the multiples as verified. Added the direct-small-competitor and geography questions, which the roundup sources cannot answer.
+- **2026-08-09** — re-verification pass against this page's top open question (the market-size figures), which superseded them. The "$14.1bn in 2026 / ~26.5% CAGR" headline was misattributed: Fortune Business Insights publishes $11.91bn → $73.89bn by 2034 at 25.6%, while the $14.08bn / 26.49% pairing is Business Research Insights'. The "$116.81bn by 2035" endpoint could not be reproduced from any source found and is marked unverified rather than deleted. The larger finding is that four firms' 2026 estimates span $11.91bn–$38.7bn (3.3x) with CAGRs from 18.4% to 35.8%, so the page now says no unattributed headline number is quotable — a better answer to "re-verify at source" than a confirmation would have been. Re-confirmed the 25.7% SMB segment growth, which is unaffected. Added North America at 38.13% of 2025 market share, which partly answers the geography question: the sources' US focus describes under 40% of the category. Header's market-size bullet rewritten to the spread; geography bullet added. Pricing benchmarks flagged as the remaining unchecked figures. Egress-block cause corrected in the citation caveat.
