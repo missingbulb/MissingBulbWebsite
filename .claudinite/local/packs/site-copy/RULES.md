@@ -1,6 +1,6 @@
 # site-copy — rules
 
-## When a change adds or alters tracking/data-collection behavior, update the claims that describe it in the same commit
+## Lead with what the site actually does, then the narrower true claims
 
 PR #20 added Cloudflare Web Analytics (visit counting) and shipped `privacy.html`
 in the same commit — but the page's first draft still led with *"no cookies, no
@@ -10,9 +10,5 @@ actually measured first, plainly say the site is **not** analytics-free, and kee
 the narrower claims (no cross-site tracking, no ads, no cookies set by us) only
 where they remain true.
 
-So: treat any existing claim about tracking, data collection, or "what we don't
-do" as part of the same change that touches that behavior — read `privacy.html`
-(and the footer/marketing copy that references it) before shipping, and update it
-in the same commit rather than leaving it for a review round-trip. Lead with what
-is actually done, then the narrower true claims — never a blanket denial the new
-behavior no longer supports.
+So: lead with what is actually done, then the narrower true claims — never a
+blanket denial the new behavior no longer supports.

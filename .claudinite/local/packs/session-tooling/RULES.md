@@ -104,23 +104,6 @@ So: when the session's opening prompt is a scheduler dispatch, put
 `Comment class: other` in your **first** substantive reply — a command phrase is `other`
 by the rule's own wording. Don't wait for the Stop hook to tell you.
 
-## A subagent shares your working tree — put the branch back before you stop
-
-`Agent` subagents run in the *same* checkout, not a worktree of their own. A subagent that
-does `git checkout` to reach a PR branch silently moves the parent, and the parent's Stop
-hook then evaluates commits that aren't the parent's.
-
-One executor sat on its own branch, dispatched a baselining subagent that checked out
-`claudinite/maintenance-2026-07-31-e7xiad`, and got
-`task-lifecycle: none of the 1 commit(s) since origin/main references an issue (#N)`
-about a commit written by preprocessing, not by it. Two blocked Stop rounds and ~2m40s of
-investigation (05:09:46 → 05:12:25); the fix was one `git checkout` back to its own
-branch, after which the hook passed unchanged.
-
-So: after any subagent that may touch git, run `git branch --show-current` and switch back
-before ending the turn — and read a surprising `task-lifecycle` finding as "am I on the
-branch I think I'm on?" before reading it as a real lifecycle violation.
-
 ## The mounted `.claudinite/shared/` is code without its docs — and its runners are silent when clean
 
 Two ways the engine mount misleads a session that goes reading it, both paid for
