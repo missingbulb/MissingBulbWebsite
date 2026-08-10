@@ -21,6 +21,27 @@ leftovers in its prompt, per bootstrap); anywhere else, an issue.
 And before handing a step over at all, check you actually can't do it — see the
 `session-tooling` rule on searching a tool's literal name.
 
+## Key an escalation issue to the root cause, not to the cycle that hit it
+
+A maintenance cycle that meets a blocking finding it must not guess at escalates by
+opening an issue. When the cause is upstream and unfixed, *every* later cycle meets the
+same finding — so the decision that matters is what the **second** filing does.
+
+`check_the_world`'s blocking `declares unknown pack "claude-code-web-users-support"` has
+now recurred on PRs #85, #88, #90, #104 and #106. The first run opened #87 and the next
+correctly logged its recurrence as a comment there. The 2026-08-09 run opened **#92**
+instead, its stated reason being that PR #90 "is a different cycle/branch than the ones
+already logged here." True, and irrelevant: one unresolved upstream cause now carries two
+open `needs-decision` issues, its recurrence history is split across both, and a
+tidy-issues pass had to spend itself cross-linking them (*"see #87 for the running
+history"*, *"see #92 for the latest recurrence"*) while being permitted to close neither.
+
+So: before opening an issue for a blocking finding, search the open issues for the
+finding's own text and comment on the match instead. A new branch, a new PR number or a
+new dispatch issue is not a new finding. One issue per cause is what keeps "has anyone
+decided this yet?" answerable — and what stops a standing upstream defect from minting a
+fresh issue every day.
+
 ## Check the canon packs before hand-authoring release or CI plumbing
 
 PR #31 hand-rolled this repo's release: `scripts/bump-version.mjs` plus a
