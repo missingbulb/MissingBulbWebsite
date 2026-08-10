@@ -9,15 +9,32 @@ one session:
   `githubusercontent.com` file, it returned a prose description of the document
   instead. The file had to be re-fetched with `curl -sSL -o <scratch>/f.md <url>`
   and read from disk — the correct move the first time.
-- **It 403s.** Four consecutive fetches of ordinary publisher pages
-  (`gartner.com`, `fortunebusinessinsights.com`, `marketdataforecast.com`,
-  `squarerootseo.com`) all returned `403 Forbidden`, so a research pass ended up
-  attributing figures to search snippets instead of verifying them at source.
+- **It is blocked at the network egress proxy — which is not the same as a
+  publisher 403, and this rule said 403 for a week.** The fetcher's actual reply is
+  `{"error_type":"EGRESS_BLOCKED","domain":"www.gartner.com","message":"Access to
+  www.gartner.com is blocked by the network egress proxy."}`. One 2026-08-09 research
+  pass collected nine of them: `gartner.com`, `fortunebusinessinsights.com`,
+  `marketdataforecast.com`, `digitalcommerce360.com`, `demandgenreport.com`,
+  `businesswire.com`, `barchart.com`, `debriefing.io`, `techintelpro.com`.
 
 So: when the content itself matters, `curl` it into the scratchpad and `Read` it.
-When a page 403s, do **not** retry it or try a sibling URL — take the `WebSearch`
-snippet, attribute it to the publisher rather than asserting it, and flag it for
-re-verification. `WebSearch` itself works fine and is the right first reach.
+`WebSearch` itself works fine and is the right first reach.
+
+The corrected cause changes what to do after a block, in two ways. A publisher 403
+is per-site, so a wire service or an independent report carrying the same release is
+a live alternative to try; an egress block is not — in that one session it took out
+the primary release **and** every secondary carrier of it. Don't work down a list of
+alternative URLs hoping one is reachable. And don't file "re-verify at source next
+pass" as an open question: no agent pass here can ever close it. Write it as needing
+a human or an unblocked environment, so it stops being re-attempted.
+
+**A snippet gives you the number, not its publisher.** Working from search summaries,
+the first wiki pass attributed "$14.1bn in 2026 / ~26.5% CAGR" to Fortune Business
+Insights. Those are Business Research Insights' figures ($14.08bn / 26.49%); Fortune
+publishes $11.91bn / 25.6%. Corroborating a figure across several snippets does not
+corroborate **who published it** — the snippets quote each other. When you cannot open
+the report, attribute a number to the firm a source explicitly names as its origin,
+and when sources disagree about that, say so rather than picking one.
 
 **`codeload.github.com` is blocked here too** — `curl … | tar -xz` of a repo
 tarball returns 403. Use `git clone --depth 1 https://github.com/<owner>/<repo>`,
@@ -146,3 +163,26 @@ paragraph — it is a public claim about a named person that they never made. Th
 is in the conversation; one question is cheaper than any research. (The site-specific
 form of this now sits in `product-wiki/product-requirements/` as a reviewed
 requirement; this rule is the general one, for any repo and any surface.)
+
+## `ScheduleWakeup` wants a `prompt`, and its refusal is not "this tool isn't for you"
+
+Every executor session here hands the real work to a subagent and then wants a fallback
+heartbeat in case the completion notification never lands. Five captured sessions tried
+it. Three passed only `delaySeconds` and `reason` and got back
+
+> `` `prompt` is required when `stop` is not true ``
+
+(2026-08-08 on issues #86 and #89, 2026-08-09 on #105). The two that also passed a
+`prompt` were armed normally — `Next wakeup scheduled for 03:26:00 (in 1524s)` — so the
+tool works here and is the right reach.
+
+The ~2s rejection is not the cost. What it cost is the conclusion: two of the three
+sessions decided out loud that the tool "is for `/loop` mode, not applicable here" and
+moved on, and #105 spent a further call on `ScheduleWakeup {stop: true}` cancelling a
+wakeup that had never been set. All three then sat waiting on a bare task-notification
+with **no fallback armed while believing they had one** — precisely the safety net an
+unattended run has no way to notice is missing.
+
+So: on any `ScheduleWakeup` that isn't `{stop: true}`, pass `prompt` — what the woken
+turn should resume doing. And read that message literally: it names an argument you
+left out, not a mode you are not in.
