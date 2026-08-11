@@ -1,4 +1,3 @@
-
 # Claudinite per-repo task scheduler — the repo's ONLY cron
 # (per-project-scheduling DESIGN §3). A thin shim: all logic lives in the
 # vendored engine, so this file changes rarely (schema and behavior changes ride
