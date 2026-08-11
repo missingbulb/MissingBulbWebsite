@@ -1,6 +1,6 @@
 {
   "name": "missingbulb-website",
-  "version": "1.0810.14",
+  "version": "1.0811.15",
   "private": true,
   "description": "The Missing Bulb marketing site — static, hand-authored. This file exists to carry the released version; there is no build and no dependency.",
   "type": "module",
