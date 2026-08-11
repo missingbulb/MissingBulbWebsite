@@ -35,16 +35,5 @@
       }
     }
   ],
-  "maintenance": {
-    "delivery": "auto-merge"
-  },
-  "taskScheduler": {
-    "dailyHour": 4,
-    "weeklyDay": "Sun",
-    "monthlyDay": 1
-  },
-  "claudinite": {
-    "updated": "2026-08-10T00:00:00.000Z",
-    "ref": "8deaaef39a6d9b283d0909ec9d694228735b5402"
-  }
+  "config": "missingbulb/Sheepdog"
 }
