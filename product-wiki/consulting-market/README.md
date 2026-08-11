@@ -11,7 +11,7 @@ small firm is read against.
 - North America is under 40% of the market, so the US-centric sources describe a minority of it.
 - Benchmark pricing for small-business AI work: $5k–$25k per project, or $150–$350 per hour.
 - Outcome-based and capped-budget engagements beat hourly; shipping in weeks beats months of discovery.
-- Nobody sells "AI Software Management" — the recognised neighbours are AI strategy, governance and policy.
+- Nobody else sells "AI Software Management"; the site now defines it in public, anchored on Claudinite.
 - Boutiques win on cost, speed and hands-on build, not breadth: that is the wedge against IBM and RSM.
 
 ## Category as stated
@@ -61,6 +61,30 @@ page](../brand/README.md), Missing Bulb already has the artefact that defines it
 Claudinite is a working system for managing AI-assisted software development.
 Coining the category and shipping the thing it names is a much better position
 than coining it alone.
+
+**Answered 2026-07-31 — the definition now exists.** This page's open question
+"if the site defines the category, what is the one-sentence definition, and does
+Claudinite anchor it?" was resolved off-wiki by the owner. Requirement 1 makes
+defining it mandatory ("the site's hero must define it in one plain sentence,
+anchored by Claudinite as the working example"), and the shipped hero reads:
+*"Running software development where AI agents do the engineering — governed by
+shared guidelines and automated checks, so the work stays fast and trustworthy"*
+([`site/index.html`](https://github.com/missingbulb/MissingBulbWebsite/blob/main/site/index.html), landed in
+[PR #17](https://github.com/missingbulb/MissingBulbWebsite/pull/17)). The
+definition is a *method* claim, not a services list — which is the version most
+likely to become an evaluation standard, and the version most exposed if the
+practice behind it ever stops being real. It is also backed on the page by an
+explicit dogfooding claim rather than an advisory one.
+
+**Answered 2026-07-31 — and against this page's suggestion.** The pricing
+question ("should the site publish a starting price, given the category norm is
+contact-us?") was decided **no**: requirement 4 specifies scoped engagements,
+working software in weeks, and "no published pricing — the call to action is
+*get in touch*." Requirement 7 additionally bars market-size figures from the
+site entirely. Both are the owner's call and stand; the effect on this page is
+that its pricing and sizing research is now input to *scoping conversations and
+positioning judgement*, not to site copy. Worth recording plainly: the
+differentiator this page argued for was considered and declined.
 
 ## Pricing and engagement norms
 
@@ -138,6 +162,9 @@ should not be read as describing the whole market.
 - [List of 20 Leading AI Consulting Firms, Intellectyx](https://www.intellectyx.com/list-of-20-leading-ai-consulting-firms-providing-comprehensive-services/) — boutique set, second list.
 - [Top 10 AI Consulting Companies to Watch in 2026, Binariks](https://binariks.com/blog/top-ai-consulting-firms/) — boutique set, third list.
 - [Cognitive Market Research: AI Consulting Services Market](https://www.cognitivemarketresearch.com/ai-consulting-services-market-report) — third market-sizing source.
+- [product-requirements](https://github.com/missingbulb/MissingBulbWebsite/blob/main/product-wiki/product-requirements/README.md) — requirements 1, 4 and 7, the owner's promoted decisions on defining the category, not publishing pricing, and excluding market-size figures from the site.
+- [`site/index.html`](https://github.com/missingbulb/MissingBulbWebsite/blob/main/site/index.html) — the shipped one-sentence definition of the category, quoted above.
+- [PR #17, Restructure the site around the AI Software Management practice](https://github.com/missingbulb/MissingBulbWebsite/pull/17) — where the definition landed and the pricing decision was made.
 
 **Citation caveat, recorded rather than hidden:** the size, forecast, CAGR,
 segment-growth and pricing figures come from search-result summaries rather than
@@ -155,14 +182,14 @@ re-checked this pass and still rest on the first pass's summaries.
 - If the site cites a market size at all, whose definition of "AI consulting services" does it adopt? The 3.3x spread across firms makes an unattributed headline number indefensible.
 - Where does the unverified "$116.81bn by 2035" figure come from? No source found this pass reproduces it.
 - Re-verify the pricing benchmarks ($5k–$25k per project, $150–$350 per hour) — untouched since the first pass, and the only remaining figures on this page with a single unchecked origin.
-- Which of the three practices is the realistic wedge, and should the site lead with it rather than list all three?
-- Should the site publish a starting price, given that the category norm is "contact us" and publishing would differentiate?
-- If the site defines "AI Software Management" as a category, what is the one-sentence definition, and does Claudinite anchor it?
 - Who are the *direct* competitors at Missing Bulb's actual size — one-to-five-person firms, not the roundup names?
 - Is there a geographic scope to this? Every source found is US-centric — and North America is only 38% of the market, so they describe a minority of it. Where does Missing Bulb actually sell?
+- Does anyone else now market the "AI agents do the engineering, humans govern" method as a named practice? The coinage was clear on 2026-07-30; it needs periodic re-checking, since a defined category invites imitation.
+- With pricing kept off the site, what is the scoping script — what does a buyer get told about cost, and when?
 
 ## Growth log
 
 - **2026-07-30** — initial seed at Claudinite adoption. Owner's category framing recorded; competitor set deferred by the owner, so left unnamed.
 - **2026-07-30** — first research pass; named the competitor set, which was this page's highest-value gap. Found it resolves into two tiers rather than one list (global/mid-market generalists vs AI-specialist boutiques) and that boutiques are documented to win on cost, speed and hands-on build — a wedge that fits Missing Bulb's size. Confirmed "AI Software Management" is a coinage against the majors' own service vocabulary, and reframed that as an opportunity given Claudinite already implements what the label names. Added pricing benchmarks, engagement-structure norms and market sizing with SMB segment detail. Flagged the vendor-forecast optimism and the 403 citation caveat rather than presenting the multiples as verified. Added the direct-small-competitor and geography questions, which the roundup sources cannot answer.
 - **2026-08-09** — re-verification pass against this page's top open question (the market-size figures), which superseded them. The "$14.1bn in 2026 / ~26.5% CAGR" headline was misattributed: Fortune Business Insights publishes $11.91bn → $73.89bn by 2034 at 25.6%, while the $14.08bn / 26.49% pairing is Business Research Insights'. The "$116.81bn by 2035" endpoint could not be reproduced from any source found and is marked unverified rather than deleted. The larger finding is that four firms' 2026 estimates span $11.91bn–$38.7bn (3.3x) with CAGRs from 18.4% to 35.8%, so the page now says no unattributed headline number is quotable — a better answer to "re-verify at source" than a confirmation would have been. Re-confirmed the 25.7% SMB segment growth, which is unaffected. Added North America at 38.13% of 2025 market share, which partly answers the geography question: the sources' US focus describes under 40% of the category. Header's market-size bullet rewritten to the spread; geography bullet added. Pricing benchmarks flagged as the remaining unchecked figures. Egress-block cause corrected in the citation caveat.
+- **2026-08-02** — reconciliation pass, prompted by the product-wiki tree moving in the window. No new market research; the change is that three of this page's open questions were decided off-wiki by the owner's 2026-07-31 requirements promotion (PR #17), and the page said nothing about it. **The wedge question is answered:** the site now leads with the AI Software Management practice and subordinates the other three. **The definition question is answered:** requirement 1 mandated a one-sentence hero definition and the shipped copy defines the category as a method — AI agents engineering under human governance — anchored on Claudinite, which is now recorded here verbatim. **The pricing question is answered no**, against this page's own suggestion: requirement 4 rules out published pricing and requirement 7 bars market-size figures from the site, so this page's pricing and sizing research is input to scoping and positioning rather than to copy. Recorded the decline plainly rather than quietly dropping the recommendation. Added a re-check question on whether the coinage is still unclaimed, and one on what a buyer is told about cost now that the site says nothing.
