@@ -1,5 +1,42 @@
 # repo-mechanics — rules
 
+## A rebase that drops work must amend the commit message too
+
+PR #59 opened 2026-08-02 with three pages of product-wiki research and sat seven
+days awaiting review. On 2026-08-09 an independent pass landed the same
+`audience/` findings as #103 — the same 67% qualifier correction, the same n=646
+provenance, the same 69%/45%/seven-sources figures — so #59 was rebased and its
+`audience/` half dropped as duplicate work. The rebase corrected the tree. It did
+not touch the branch's single commit message, and this repo squash-merges, so
+that message became main's permanent record: `9f617bf` opens with three
+paragraphs describing an `audience:` correction, while `git show --stat` on it
+lists only `brand/README.md` and `consulting-market/README.md`. The explanation
+of what was dropped exists only as a PR comment, which the squash never carried.
+
+So: when a rebase or a review round removes part of a branch, amend the commit
+message in the same step, and read it back against `git show --stat` before
+merging. A PR comment serves whoever reads the PR that week; the commit body is
+what the next reader of `git log -- <path>` gets, and a commit claiming a file it
+never touched sends them hunting for a change that isn't there.
+
+## An unmerged PR is invisible to the next pass — check open PRs before researching
+
+The `product-wiki` pack gates unattended growth deliberately: it always lands as
+an unmerged PR, because researched claims entering a committed knowledge base
+need a human reading them. The price of that gate is that a pass's findings are
+not in `main`, and the next pass looks only at `main`. PR #59 answered the
+audience page's standing open question on 2026-08-02 and was still open on
+2026-08-09, when the next pass researched the identical question from scratch and
+landed it as #103 — same correction, same provenance, same three new figures. A
+whole research half was thrown away, and #59's merge two days later carried none
+of it.
+
+So: before opening a research question on a wiki page — or on anything else whose
+changes land review-gated here — list the open PRs touching that path and read
+them first. An open PR is work already done, not work still to do. When one
+already answers the question, the move is to say so on that PR and get it
+reviewed, not to answer it a second time.
+
 ## A step only the owner can perform goes in its own issue, never in the PR body
 
 A merged PR's body is not a to-do list anyone returns to. PR #12 shipped the
