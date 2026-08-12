@@ -9,7 +9,8 @@
 export default {
   id: 'repo-mechanics',
   ruleRoutingGuidance: {
-    belongs: "this repo's release/CI plumbing and the setup steps only the owner can perform",
+    belongs:
+      "this repo's release/CI plumbing, the owner-only setup steps, and how work is recorded and delivered — issues, PRs, commit messages",
     excludes: 'site markup and copy — html and site-copy; session tooling traps — session-tooling',
   },
   detect: null,

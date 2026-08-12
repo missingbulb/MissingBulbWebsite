@@ -1,5 +1,35 @@
 # session-tooling — rules
 
+## Don't retype file content into `push_files` / `create_or_update_file`
+
+The GitHub MCP file-write tools take the file body as a literal string, so what
+lands is the model's *transcription* of the file, not the file. Two sessions
+corrupted a file that way on 2026-08-11 alone:
+
+- **`push_files` truncated `.claudinite-checks.json`** onto PR #116's branch at
+  10:09:12 — `maintenance`, `taskScheduler` and `claudinite` gone, a bogus
+  top-level `config` key in their place. The repair commit `26abc08` says it
+  plainly: *"a manual transcription error in the push tool call, not a real
+  converge/check finding."* Recovery cost a `get_file_contents`, a
+  `git reset --hard` onto the bad commit, a re-copy from the scratch file, a diff
+  to prove the match and a second commit — about 100 seconds, with a mangled
+  config file live on an open PR in between.
+- **`create_or_update_file` added a stray leading blank line** to
+  `.github/workflows/claudinite-scheduler.yml` at 15:56:20, caught only because
+  that session happened to re-read the file afterwards, and fixed by a re-push.
+
+Both files already existed byte-exact on disk — one written by
+`converge-wiring.mjs`, one by a scratch script — and `git commit && git push`
+would have shipped them unchanged. That is exactly what the first session fell
+back to once it saw the damage.
+
+So: push with git. Reserve the MCP file-write tools for the case that genuinely
+needs them — files under `.github/workflows/`, which the Action's `GITHUB_TOKEN`
+is structurally forbidden to push (see the comment in `baselining/worker.mjs`) —
+and when you use them, read the result back with `get_file_contents` and diff it
+against the local file before moving on. Folding a non-workflow file into the
+same MCP push "so it's one commit" is what cost both of these.
+
 ## Never use WebFetch to obtain content you must have
 
 `WebFetch` fails two different ways in this environment, and both were paid for in
