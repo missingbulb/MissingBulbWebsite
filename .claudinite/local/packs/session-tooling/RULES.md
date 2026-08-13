@@ -30,6 +30,32 @@ and when you use them, read the result back with `get_file_contents` and diff it
 against the local file before moving on. Folding a non-workflow file into the
 same MCP push "so it's one commit" is what cost both of these.
 
+## A GitHub MCP list read blows the token cap — `fields` is the size knob, not `per_page`
+
+Any `mcp__github__*` read that returns a *list* of objects here returns the objects whole,
+and the result is routinely 80KB–400KB — over the cap, so nothing reaches the session and
+the body is spilled to a `tool-results/*.txt` file instead. Eight captured sessions between
+2026-07-30 and 2026-08-12 hit it twelve times, across four different tools:
+`search_repositories` (80KB, 86KB), `pull_request_read` `get` (158KB, 157KB, 168KB),
+`search_issues` (112KB, 106KB) and `actions_list` `list_workflow_runs` (395KB, twice).
+
+The trap is that the obvious knob is the wrong one. On 2026-08-12 a session called
+`actions_list list_workflow_runs` with `per_page: 5`, got the overflow, and retried 23s
+later with `per_page: 3` — **exactly 395,103 characters both times.** `per_page` does not
+shrink these payloads; the per-object field set does. So:
+
+- Pass a **`fields` subset** on every `search_issues` / `list_issues` / `search_repositories`
+  call — `["number","title","state"]` is enough for almost everything Claudinite tasks do.
+  Dropping `body` alone is usually the whole difference; the same session's third
+  `search_issues` call, identical but for `fields`, came back fine.
+- `actions_list` has **no `fields` and no `minimal_output`** — `per_page` is its only knob and
+  it doesn't work. Don't retry it smaller. Either narrow with `workflow_runs_filter`, or take
+  the overflow as the answer and query the spilled file directly
+  (`python3 -c "import json; …"` or `jq` over the `tool-results/*.txt` path in the error).
+  That fallback is what finally worked, ~35s after the first attempt.
+- For a PR, prefer the narrow method (`get_files`, `get_commits`, `get_check_runs`) over
+  `get`, whose body plus every field is what overflows.
+
 ## Never use WebFetch to obtain content you must have
 
 `WebFetch` fails two different ways in this environment, and both were paid for in
