@@ -73,11 +73,22 @@ open `needs-decision` issues, its recurrence history is split across both, and a
 tidy-issues pass had to spend itself cross-linking them (*"see #87 for the running
 history"*, *"see #92 for the latest recurrence"*) while being permitted to close neither.
 
-So: before opening an issue for a blocking finding, search the open issues for the
-finding's own text and comment on the match instead. A new branch, a new PR number or a
-new dispatch issue is not a new finding. One issue per cause is what keeps "has anyone
-decided this yet?" answerable — and what stops a standing upstream defect from minting a
-fresh issue every day.
+So: before opening an issue for a blocking finding, search the open issues and comment on
+the match instead. A new branch, a new PR number or a new dispatch issue is not a new
+finding. One issue per cause is what keeps "has anyone decided this yet?" answerable — and
+what stops a standing upstream defect from minting a fresh issue every day.
+
+**Search on the invariant identifier the finding names, not on the finding's sentence.**
+This rule landed on 2026-08-10 and the same cause was filed twice more anyway — **#120** on
+2026-08-11 and **#125** on 2026-08-12, taking the count to four. The reason each search
+missed is visible in the four titles: `check_the_world blocks on "declares unknown pack
+claude-code-web-users-support"` (#87), `check_the_world blocking: declared pack … has no
+vendored code` (#92), `baselining: declared pack … has no vendored content` (#120),
+`claudinite: declared pack … has no code in the vendored mount` (#125). Every filer
+paraphrased the check's message and prefixed its own stage's name, so the only token common
+to all four is the bare identifier `claude-code-web-users-support`. Search **that** — the
+pack id, the file path, the symbol, whatever literal the finding is *about* — never the
+wording it arrived in, which is the one part that changes per filer.
 
 ## Check the canon packs before hand-authoring release or CI plumbing
 
