@@ -33,7 +33,8 @@
       "config": {
         "repo": "missingbulb/Sheepdog"
       }
-    }
+    },
+    "core"
   ],
   "maintenance": {
     "delivery": "auto-merge",
@@ -47,7 +48,7 @@
   "claudinite": {
     "updated": "2026-08-12T23:02:48.129Z",
     "ref": "631a067f5a0413e154a0d4c1a66275f18b255af9",
-    "engineVersion": 3,
+    "engineVersion": 4,
     "packVersions": {
       "basics": 2,
       "barriers": 1,
@@ -57,7 +58,8 @@
       "html": 1,
       "product-wiki": 1,
       "github-actions": 1,
-      "claude-code-web-users-support": 1
+      "claude-code-web-users-support": 1,
+      "core": 1
     }
   }
 }
