@@ -242,3 +242,35 @@ unattended run has no way to notice is missing.
 So: on any `ScheduleWakeup` that isn't `{stop: true}`, pass `prompt` — what the woken
 turn should resume doing. And read that message literally: it names an argument you
 left out, not a mode you are not in.
+
+## `search_issues` ranks, it never filters — find a known title with `list_issues`
+
+Every task here that keeps a standing log opens by finding an issue **by its exact
+title**, and `mcp__github__search_issues` is the wrong tool for that. Its own
+description says what it is: *"natural-language semantic matching."* It does not honour
+GitHub's search qualifiers, it ranks by resemblance — so the title that matches exactly
+can be absent from the page while five that don't are on it. Four captured sessions in
+two days paid for this:
+
+- **#131** (2026-08-13) searched `Claudinite tracker Growth Extract` and got back
+  `Growth Dedup`, `Product Wiki Growth`, `Tidy Issues`, `Tidy Branches`, `Tidy PRs` —
+  every tracker except the one it named. The wanted issue, `Claudinite tracker: Growth
+  Extract`, is **#9** and is **closed**; it was not in the result at all. The session
+  recovered with `list_issues`.
+- **#124** (2026-08-12) ran the same query and missed the same way, then composed a
+  longer sentence for a second search, which surfaced #9 — fifth, below three misses.
+- **#134** (2026-08-13) used the qualifier form, `repo:… in:title "Claudinite tracker:
+  Tidy Issues"`, with no `fields`, twice: **109,350 and 107,368 characters**, both over
+  the token cap, both spilled to a file. It fell back to `list_issues`.
+- **#128** (2026-08-12) used that same qualifier form *with* `fields` and got a usable
+  answer — with `Claudinite tracker: Tidy PRs` sitting second in it. `in:title` filtered
+  nothing; passing `fields` only fixed the size, never the ranking.
+
+So: when you already know the title, call `list_issues` with
+`fields: ["number","title"]` and `perPage: 100`, **no `state` filter** — this repo's
+trackers are closed by design — and match the string yourself in the session. All 80
+issues come back in one call, well inside the cap. Reserve `search_issues` for what it
+is actually good at: finding issues you can only describe, not ones you can name.
+
+The canon `git-github` pack's advice to anchor with `in:title "<exact title>"` is about
+GitHub's own search API; it does not carry to this MCP server's semantic tool.
