@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "foldedThrough": "2026-08-14",
-  "runsFoldedThrough": "2026-08-15T03:20:46Z",
+  "foldedThrough": "2026-08-15",
+  "runsFoldedThrough": "2026-08-16T04:18:48Z",
   "days": {
     "2026-07-30": {
       "captures": 13,
@@ -1183,15 +1183,22 @@
       }
     },
     "2026-08-15": {
-      "captures": 0,
-      "merges": 0,
-      "sessions": 0,
+      "captures": 1,
+      "merges": 1,
+      "sessions": 1,
       "userMessages": 0,
       "userCommands": 0,
       "skillLoads": {},
       "checks": {},
       "checkFindings": {},
       "tasks": {
+        "basics/task-janitor": {
+          "agent": 0,
+          "prework": 1,
+          "skipped": 0,
+          "failed": 0,
+          "deferred": 0
+        },
         "core/update": {
           "agent": 0,
           "prework": 1,
@@ -1205,9 +1212,85 @@
           "skipped": 1,
           "failed": 0,
           "deferred": 0
+        },
+        "grow_with_claudinite/usage-fold": {
+          "agent": 0,
+          "prework": 1,
+          "skipped": 0,
+          "failed": 0,
+          "deferred": 0
+        },
+        "tidy-repo/tidy-issues": {
+          "agent": 1,
+          "prework": 0,
+          "skipped": 0,
+          "failed": 0,
+          "deferred": 0
         }
       },
-      "taskExec": {}
+      "taskExec": {
+        "tidy-repo/tidy-issues": {
+          "success": 1,
+          "failed": 0,
+          "task-gone": 0,
+          "invalid": 0
+        }
+      }
+    },
+    "2026-08-16": {
+      "captures": 1,
+      "merges": 1,
+      "sessions": 1,
+      "userMessages": 0,
+      "userCommands": 0,
+      "skillLoads": {},
+      "checks": {
+        "work": {
+          "runs": 3,
+          "failures": 1,
+          "errors": 0,
+          "blocking": 1,
+          "advisory": 0,
+          "ciRuns": 0,
+          "ciFailures": 0
+        },
+        "world": {
+          "runs": 1,
+          "failures": 0,
+          "errors": 0,
+          "blocking": 0,
+          "advisory": 1,
+          "ciRuns": 0,
+          "ciFailures": 0
+        }
+      },
+      "checkFindings": {
+        "comment-classification": {
+          "blocking": 1,
+          "advisory": 0
+        },
+        "rules-line-length": {
+          "blocking": 0,
+          "advisory": 1
+        }
+      },
+      "tasks": {
+        "core/update": {
+          "agent": 1,
+          "prework": 0,
+          "skipped": 0,
+          "failed": 0,
+          "deferred": 0
+        }
+      },
+      "taskExec": {
+        "core/update": {
+          "success": 1,
+          "failed": 0,
+          "task-gone": 0,
+          "invalid": 0
+        }
+      }
     }
   },
   "weeks": {
@@ -1460,10 +1543,10 @@
       }
     },
     "2026-W33": {
-      "days": 5,
-      "captures": 15,
-      "merges": 15,
-      "sessionDays": 15,
+      "days": 6,
+      "captures": 16,
+      "merges": 16,
+      "sessionDays": 16,
       "userMessages": 0,
       "userCommands": 0,
       "skillLoads": {
@@ -1520,7 +1603,7 @@
         },
         "basics/task-janitor": {
           "agent": 0,
-          "prework": 5,
+          "prework": 6,
           "skipped": 0,
           "failed": 0,
           "deferred": 0
@@ -1534,7 +1617,7 @@
         },
         "core/update": {
           "agent": 0,
-          "prework": 1,
+          "prework": 2,
           "skipped": 0,
           "failed": 0,
           "deferred": 0
@@ -1542,19 +1625,19 @@
         "grow_with_claudinite/growth-extract": {
           "agent": 4,
           "prework": 0,
-          "skipped": 1,
+          "skipped": 2,
           "failed": 0,
           "deferred": 0
         },
         "grow_with_claudinite/usage-fold": {
           "agent": 0,
-          "prework": 5,
+          "prework": 6,
           "skipped": 0,
           "failed": 0,
           "deferred": 0
         },
         "tidy-repo/tidy-issues": {
-          "agent": 5,
+          "agent": 6,
           "prework": 0,
           "skipped": 0,
           "failed": 0,
@@ -1581,7 +1664,7 @@
           "invalid": 0
         },
         "tidy-repo/tidy-issues": {
-          "success": 7,
+          "success": 8,
           "failed": 0,
           "task-gone": 0,
           "invalid": 0
