@@ -56,27 +56,18 @@ shrink these payloads; the per-object field set does. So:
 - For a PR, prefer the narrow method (`get_files`, `get_commits`, `get_check_runs`) over
   `get`, whose body plus every field is what overflows.
 
-## Never use WebFetch to obtain content you must have
+## An egress block is not a publisher 403 — and doesn't forgive a second source
 
-`WebFetch` fails two different ways in this environment, and both were paid for in
-one session:
+`WebFetch` is blocked at the network egress proxy for some domains — a distinct failure
+from an ordinary publisher `403`, and one this rule mislabeled as 403 for a week. The
+fetcher's actual reply is
+`{"error_type":"EGRESS_BLOCKED","domain":"www.gartner.com","message":"Access to
+www.gartner.com is blocked by the network egress proxy."}`. One 2026-08-09 research
+pass collected nine of them: `gartner.com`, `fortunebusinessinsights.com`,
+`marketdataforecast.com`, `digitalcommerce360.com`, `demandgenreport.com`,
+`businesswire.com`, `barchart.com`, `debriefing.io`, `techintelpro.com`.
 
-- **It summarizes.** Asked for "the complete verbatim content" of a raw
-  `githubusercontent.com` file, it returned a prose description of the document
-  instead. The file had to be re-fetched with `curl -sSL -o <scratch>/f.md <url>`
-  and read from disk — the correct move the first time.
-- **It is blocked at the network egress proxy — which is not the same as a
-  publisher 403, and this rule said 403 for a week.** The fetcher's actual reply is
-  `{"error_type":"EGRESS_BLOCKED","domain":"www.gartner.com","message":"Access to
-  www.gartner.com is blocked by the network egress proxy."}`. One 2026-08-09 research
-  pass collected nine of them: `gartner.com`, `fortunebusinessinsights.com`,
-  `marketdataforecast.com`, `digitalcommerce360.com`, `demandgenreport.com`,
-  `businesswire.com`, `barchart.com`, `debriefing.io`, `techintelpro.com`.
-
-So: when the content itself matters, `curl` it into the scratchpad and `Read` it.
-`WebSearch` itself works fine and is the right first reach.
-
-The corrected cause changes what to do after a block, in two ways. A publisher 403
+The distinction changes what to do after a block, in two ways. A publisher 403
 is per-site, so a wire service or an independent report carrying the same release is
 a live alternative to try; an egress block is not — in that one session it took out
 the primary release **and** every secondary carrier of it. Don't work down a list of
@@ -96,88 +87,17 @@ and when sources disagree about that, say so rather than picking one.
 tarball returns 403. Use `git clone --depth 1 https://github.com/<owner>/<repo>`,
 which works through the proxy and yields the same tree.
 
-## A ToolSearch that finds nothing does not mean the tool is absent
-
-Deferred tools are matched by keyword, and the keywords are not the tool's own
-vocabulary. A session searched `"create trigger routine scheduled task
-automation"`, got back `TaskCreate`/`CronCreate`/etc., concluded there was no
-trigger API in the session, and told the owner to create a scheduled routine by
-hand — while `create_trigger` was in its tool list the whole time. The owner's
-reply was "Why didn't you create the routine? You should have."
-
-Before telling the owner a step is theirs because the capability is missing:
-search the **literal name** (`select:create_trigger`), and try the tool. A
-negative keyword search is evidence about the query, not about the environment —
-and handing the owner work the session could have done is the expensive half of
-the mistake.
-
-**`select:` wants the fully-qualified name — for an MCP tool that means the
-`mcp__<server>__` prefix.** `select:issue_read`, `select:pull_request_read` and
-`select:enable_pr_auto_merge` each return `No matching deferred tools found`,
-which reads exactly like an absent tool; `select:mcp__github__issue_read` returns
-it. Three executor sessions on 2026-08-01 hit this six times between them (two in
-session `1fc538f6`, three in `ecc58551`, one in `000d1bf8`), every one recovered
-by a second `ToolSearch` — ~2–4s and a wasted call each, and the usual recovery
-(fall back to a keyword query) pulls back five to ten schemas where the `select:`
-would have pulled one. Copy the prefix off the deferred-tools list rather than
-typing the short name from memory.
-
-## `Edit` needs the `Read` tool — `cat`/`grep`/`sed` do not count
-
-Inspecting a file through Bash does **not** register it as read. A session that had
-just explored a freshly-cloned repo with `cat`, `grep -n` and `tail` went straight to
-`Edit` on three of those files and got
-`<tool_use_error>File has not been read yet. Read it first before writing to it.</tool_use_error>`
-three times in a row (23:25:07, 23:25:09, 23:25:15) before backing off to `Read` and
-retrying — ~17s and four wasted calls for zero information gained, since the file
-contents were already on screen from the shell.
-
-The trap is specific to **exploring with the shell and then editing**, which is the
-natural rhythm when surveying an unfamiliar tree (a second repo cloned into the
-session, a vendored directory). So: the moment shell output tells you a file is the
-one you're going to change, `Read` that exact path before the first `Edit`. Reading a
-targeted `offset`/`limit` window is enough — the precondition is the tool call, not
-the byte count.
-
-## `enable_pr_auto_merge` cannot be armed in this repo — don't retry it
+## `enable_pr_auto_merge` can never arm in this repo — skip straight to a direct merge
 
 `main` carries **no branch-protection rule**, and GitHub only offers auto-merge on a
-protected branch. Every task that says "open the PR and arm auto-merge" will fail here
-until an owner adds one.
+protected branch, so every call here fails with `Protected branch rules not configured
+for this branch` no matter how it's retried. Don't call it at all: when the task's own
+spec authorizes landing without human review (the growth tasks do), poll
+`pull_request_read` `get_check_runs` until the required check *completes* successfully,
+then `merge_pull_request` with `squash` directly. Escalate `needs-human` only when the
+task requires a reviewer.
 
-Worse, the *first* refusal lies about why. One run got
-`The pull request is in unstable status (required checks are failing)` at 05:11:52 while
-the `Claudinite world sweep` check was merely still **queued** — it went green moments
-later. The agent believed the message, re-checked, retried at 05:12:19, and only then got
-the real error: `Protected branch rules not configured for this branch`. ~50s of retries,
-a tracker comment that had to be corrected by a second comment, and an otherwise
-completely successful run converged as `needs-human`.
-
-So: **do not treat "required checks are failing" from `enable_pr_auto_merge` as a check
-failure** — read `pull_request_read` `get_check_runs` and look at `status`, not
-`conclusion`. And do not retry the arm: one refusal mentioning branch protection is
-final. When the task's own spec authorizes landing without human review (the growth
-tasks do), poll `get_check_runs` until the required check *completes* successfully and
-then `merge_pull_request` with `squash`. Escalate `needs-human` only when the task
-requires a reviewer.
-
-## A scheduled executor turn still needs a `Comment class:` line
-
-The `comment-classification` check treats the scheduler's launch prompt
-(`Execute the Claudinite executor: …`) as the owner's latest comment, so **every**
-unattended executor session is one blocking Stop-hook finding away from ending. It fired
-in all three executor sessions captured on 2026-07-31, without exception.
-
-Knowing this costs 7–11 seconds (emit the line, stop again). *Not* knowing it cost one
-session over two minutes of reading `comment-classification.mjs`, `helpers/work.mjs` and
-`helpers/repo-context.mjs` to work out why an automated dispatch was being judged as
-conversation.
-
-So: when the session's opening prompt is a scheduler dispatch, put
-`Comment class: other` in your **first** substantive reply — a command phrase is `other`
-by the rule's own wording. Don't wait for the Stop hook to tell you.
-
-## The mounted `.claudinite/shared/` is code without its docs — and its runners are silent when clean
+## The mounted `.claudinite/shared/` is code without docs — and its runners are silent when clean
 
 Two ways the engine mount misleads a session that goes reading it, both paid for
 on 2026-08-01:
