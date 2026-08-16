@@ -7,8 +7,8 @@ believe it.
 ## Key insights
 
 - Claudinite is the site's lead proof now, not a candidate — the owner promoted it into the requirements.
-- The portfolio is genuinely new — all 16 org repos were created inside a seven-week window in mid-2026.
-- Zero stars and zero forks across every repo, re-checked three days later: activity, not adoption.
+- The portfolio is genuinely new — 16 repos, all created in a seven-week window that closed 2026-07-31 and hasn't grown since.
+- Zero stars and zero forks across every repo, re-confirmed at two weeks: activity, not adoption.
 - Twelve of sixteen repos were pushed to on a single day — velocity is the traction signal the stars are not.
 - "AI Software Management consulting" matches no established category; the nearest is AI governance.
 - Twelve of the sixteen repos are public, so the boast-about-our-projects strategy has real material to use.
@@ -99,6 +99,24 @@ adoption — it is throughput across a dozen concurrent projects, which is exact
 what a claim about running development with AI agents would predict. That is the
 traction evidence the site actually has, and it is not the kind stars measure.
 
+### Re-check, 2026-08-16
+
+The org counts were re-read via the GitHub API a second time, two weeks after the
+2026-08-02 check rather than three days. What moved, what did not:
+
+- **Still 16 repositories, 12 public / 4 private.** No repo has been created since
+  ClaudiniteCanary on 2026-07-31 — the seven-week creation window has now stayed
+  closed for over two weeks. That is the first evidence against this page's own
+  standing question of whether the count keeps climbing: for now, it has stopped.
+- **Zero stars and zero forks, still, across all 16.** The finding holds a second
+  time, at a longer interval than the first re-check.
+- **Language mix unchanged:** 15 of 16 repos JavaScript, 1 Python.
+- **Claudinite's open issue count is 42, not 53.** The 2026-08-02 pass recorded 53;
+  today's API read shows 42 — a real change, not a detection artifact like the
+  earlier language-mix shift, since open-issue count is a plain tally rather than
+  a heuristic. Claudinite remains the most active repo in the org by a wide margin
+  either way.
+
 ### The flagship question is settled
 
 This page's second open question — whether Claudinite should lead the site —
@@ -145,6 +163,7 @@ the sink is a human's call:
 - [ClaudiniteCanary](https://github.com/missingbulb/ClaudiniteCanary) — the sixteenth repo, created 2026-07-31, public.
 - [product-requirements](https://github.com/missingbulb/MissingBulbWebsite/blob/main/product-wiki/product-requirements/README.md) — requirements 1, 2, 3 and 5, the owner's promoted decisions on flagship, portfolio framing and founder credentials.
 - [PR #17, Restructure the site around the AI Software Management practice](https://github.com/missingbulb/MissingBulbWebsite/pull/17) and [issue #15](https://github.com/missingbulb/MissingBulbWebsite/issues/15) — where that promotion happened.
+- [missingbulb GitHub organization](https://github.com/missingbulb) — re-read 2026-08-16 via the GitHub API for a second staleness check: still 16 repos, 12 public / 4 private, 0 stars and 0 forks throughout, 15/16 JavaScript, Claudinite now at 42 open issues (was 53 on 2026-08-02), no repo created since 2026-07-31.
 
 Owner-stated positioning is recorded verbatim in
 [`.claudinite-checks.json`](../../.claudinite-checks.json) on the `product-wiki`
@@ -156,10 +175,11 @@ pack entry, and is attributable to the owner rather than to a citable source.
 - Is the brand aimed at startups, mid-market, or enterprise? The positioning language changes materially with the answer.
 - Are there any client engagements, paid or unpaid, whose outcomes could be published as case studies?
 - Is sustained throughput (12 repos pushed in a day) legible to a buyer as evidence, or does it read as unfocused without framing?
-- Does the org's repo count keep climbing, and at what point does "many small projects" start undercutting the focused-practice positioning?
+- Does the org's repo count keep climbing? Not since 2026-07-31 as of the 2026-08-16 check — at what point would renewed growth start undercutting the focused-practice positioning?
 
 ## Growth log
 
 - **2026-07-30** — initial seed at Claudinite adoption. Owner's stated positioning recorded; no research performed.
 - **2026-07-30** — first research pass, answering the coinage and proof-weight open questions. Grounded the page in the actual org contents via the GitHub API (15 repos, all created in a seven-week window, 0 stars/forks throughout, 13/15 JavaScript). Found the strongest asset is Claudinite — a product, with its own commercial site — and that it *is* AI software management in practice, which reframes the coinage question from "is the label real" to "lead with the working example". Superseded the seed's claim that the differentiator is unresearched. Left the pre-2026 credentials question open; it is not answerable from public repo data.
 - **2026-08-02** — staleness re-check of this page's load-bearing citation (the org read of 2026-07-30), prompted by the product-wiki tree moving in the window. The org is now **16 repos, 12 public / 4 private** (new: ClaudiniteCanary, 2026-07-31); **0 stars and 0 forks still hold across all 16**, so the central no-traction finding re-verifies. **Superseded with a note rather than deleted:** the language mix now reads 15/16 JavaScript and 1 Python, no HTML-primary repo — GitHub's detection moved, the earlier figure was correct when written, and the conclusion is unchanged. Claudinite 42 → 53 open issues, still the most active repo. New finding: 12 of 16 repos were pushed to on a single day, which makes throughput — not adoption — the traction evidence the org actually has. Closed three open questions against the owner's 2026-07-31 requirements promotion (PR #17): Claudinite leads (req 2), the 0-star portfolio is framed as transparency not adoption (req 3), and the founder is named with aggregator sources ruled out (req 5), which narrows how the still-open credentials question can ever be answered.
+- **2026-08-16** — second staleness re-check of the org read, this weekly pass's own spot-check. Repo count, visibility split, language mix and the zero-stars/zero-forks finding all re-verify unchanged, now confirmed two weeks apart rather than three days — and no repo has been created since 2026-07-31, the first evidence against the standing "does the count keep climbing" question. Corrected Claudinite's open-issue count from the previous pass's 53 to today's 42, a real change rather than a stale figure. Header's zero-stars and creation-window bullets reworded to carry the longer confirmation baseline.
