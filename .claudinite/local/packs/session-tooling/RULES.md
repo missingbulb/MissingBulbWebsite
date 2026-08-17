@@ -99,10 +99,21 @@ task requires a reviewer.
 
 ## The mounted `.claudinite/shared/` is code without docs — and its runners are silent when clean
 
-Two ways the engine mount misleads a session that goes reading it, both paid for
-on 2026-08-01:
+Three ways the engine mount misleads a session that goes reading it:
 
-- **The `DESIGN.md` it cites is not vendored here.** Engine source refers to it
+- **The dispatch prompt's `instructions.md` is not vendored here.** Every queued
+  work item opens with the same line — *"Read
+  `.claudinite/shared/engine/scheduler/queue/instructions.md` and follow it"* —
+  and that file does not exist in the mount: `queue/` carries `.mjs` only, and
+  the sole mention of the name anywhere in the tree is a comment in
+  `queue/invoke.mjs` describing the routine's stored prompt. Four sessions hit
+  the failed `Read` on 2026-08-16 alone (#153, #154, #158, #159 — the first work
+  items after #165 declared the queue's invocation endpoint), and each then spent
+  two to four `find`/`ls`/`grep`/`Glob` calls, 6–20s, rediscovering the same
+  answer: the procedure it means is
+  **`.claudinite/shared/engine/scheduler/executor.md`**. Read that instead of
+  searching for the file the prompt names.
+- **The `DESIGN.md` it cites is not vendored here either.** Engine source refers to it
   constantly (`// World-scope conformance runner (see DESIGN.md)`,
   `// … (per-project-scheduling DESIGN §1, §5.5)`), but
   `find .claudinite -iname 'DESIGN*'` returns nothing — the mount carries
@@ -117,9 +128,10 @@ on 2026-08-01:
   still spent 05:01:42→05:02:12 — four more calls, `--help`, `head`, `tail`,
   `grep`, a full `Read` — confirming that silence meant success.
 
-So: when the engine's own comments point at a doc, check it exists before
-hunting for it, and re-run a runner with `; echo "EXIT:$?"` **once** — the exit
-code is the whole answer, and no output is the good outcome.
+So: when a dispatch prompt or an engine comment points at a doc, check it exists
+before hunting for it — and in the queue's case go straight to `executor.md`.
+Re-run a runner with `; echo "EXIT:$?"` **once** — the exit code is the whole
+answer, and no output is the good outcome.
 
 ## Never publish an unverified fact about a real person
 
