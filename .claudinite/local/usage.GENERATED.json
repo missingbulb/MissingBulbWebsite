@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "foldedThrough": "2026-08-15",
-  "runsFoldedThrough": "2026-08-16T04:18:48Z",
+  "foldedThrough": "2026-08-16",
+  "runsFoldedThrough": "2026-08-17T03:30:47Z",
   "days": {
     "2026-07-30": {
       "captures": 13,
@@ -1238,12 +1238,14 @@
       }
     },
     "2026-08-16": {
-      "captures": 1,
-      "merges": 1,
-      "sessions": 1,
+      "captures": 5,
+      "merges": 5,
+      "sessions": 5,
       "userMessages": 0,
       "userCommands": 0,
-      "skillLoads": {},
+      "skillLoads": {
+        "growth-dedup": 1
+      },
       "checks": {
         "work": {
           "runs": 3,
@@ -1255,11 +1257,11 @@
           "ciFailures": 0
         },
         "world": {
-          "runs": 1,
+          "runs": 4,
           "failures": 0,
           "errors": 0,
           "blocking": 0,
-          "advisory": 1,
+          "advisory": 2,
           "ciRuns": 0,
           "ciFailures": 0
         }
@@ -1271,7 +1273,7 @@
         },
         "rules-line-length": {
           "blocking": 0,
-          "advisory": 1
+          "advisory": 2
         }
       },
       "tasks": {
@@ -1543,13 +1545,14 @@
       }
     },
     "2026-W33": {
-      "days": 6,
-      "captures": 16,
-      "merges": 16,
-      "sessionDays": 16,
+      "days": 7,
+      "captures": 21,
+      "merges": 21,
+      "sessionDays": 21,
       "userMessages": 0,
       "userCommands": 0,
       "skillLoads": {
+        "growth-dedup": 1,
         "select:CronList": 1,
         "select:Read,Edit,Bash": 1,
         "session-start-hook": 2,
@@ -1557,27 +1560,27 @@
       },
       "checks": {
         "work": {
-          "runs": 12,
-          "failures": 12,
+          "runs": 15,
+          "failures": 13,
           "errors": 0,
-          "blocking": 12,
+          "blocking": 13,
           "advisory": 0,
           "ciRuns": 0,
           "ciFailures": 0
         },
         "world": {
-          "runs": 20,
+          "runs": 24,
           "failures": 8,
           "errors": 0,
           "blocking": 8,
-          "advisory": 7,
+          "advisory": 9,
           "ciRuns": 0,
           "ciFailures": 0
         }
       },
       "checkFindings": {
         "comment-classification": {
-          "blocking": 12,
+          "blocking": 13,
           "advisory": 0
         },
         "config": {
@@ -1586,7 +1589,7 @@
         },
         "rules-line-length": {
           "blocking": 0,
-          "advisory": 6
+          "advisory": 8
         },
         "task-lifecycle": {
           "blocking": 5,
@@ -1616,7 +1619,7 @@
           "deferred": 0
         },
         "core/update": {
-          "agent": 0,
+          "agent": 1,
           "prework": 2,
           "skipped": 0,
           "failed": 0,
@@ -1653,6 +1656,12 @@
         },
         "basics/update": {
           "success": 2,
+          "failed": 0,
+          "task-gone": 0,
+          "invalid": 0
+        },
+        "core/update": {
+          "success": 1,
           "failed": 0,
           "task-gone": 0,
           "invalid": 0
