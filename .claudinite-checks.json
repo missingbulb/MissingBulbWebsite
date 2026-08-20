@@ -13,7 +13,7 @@
         "basics"
       ]
     },
-    "grow_with_claudinite",
+    "claudinite-growth",
     "tidy-repo",
     "html",
     {
@@ -24,7 +24,6 @@
         "market": "Software, management, and AI consulting — including AI Software Management consulting. Competitor set not yet named."
       }
     },
-    "github-actions",
     "local/session-tooling",
     "local/site-copy",
     "local/repo-mechanics",
@@ -34,7 +33,7 @@
         "repo": "missingbulb/Shepherd"
       }
     },
-    "core"
+    "claudinite-lifecycle"
   ],
   "maintenance": {
     "delivery": "auto-merge",
@@ -54,7 +53,7 @@
   "claudinite": {
     "updated": "2026-08-12T23:02:48.129Z",
     "ref": "631a067f5a0413e154a0d4c1a66275f18b255af9",
-    "engineVersion": 4,
+    "engineVersion": 6,
     "packVersions": {
       "basics": 5,
       "barriers": 2,
