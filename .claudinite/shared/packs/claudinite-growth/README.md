@@ -11,7 +11,7 @@ lessons into its local packs, and pruning them once the shared canon covers them
 that runs canon-side, not a repo-side task, so it lives outside this pack.
 
 Its scheduled work is five tasks under this pack's own `tasks/`, each discovered by the repo's
-scheduler (`engine/scheduler/discover.mjs`) wherever the pack is declared:
+scheduler (`packs/claudinite-tasks/discover.mjs`) wherever the pack is declared:
 
 | Task | Runs when | Where it lands |
 |---|---|---|
@@ -21,7 +21,7 @@ scheduler (`engine/scheduler/discover.mjs`) wherever the pack is declared:
 | `prose-to-checks-sweep` ([tasks/prose-to-checks-sweep/task.md](tasks/prose-to-checks-sweep/task.md)) | weekly (no-ops cheaply on a quiet corpus) | a PR converting always-testable pack prose into checks |
 | `rule-revalidation` ([tasks/rule-revalidation/task.md](tasks/rule-revalidation/task.md)) | weekly | a reviewed PR correcting rules whose environment claim no longer probes true |
 
-(Plus two agentless tasks over the conversation-logs branch: [usage-fold](tasks/usage-fold/README.md) hourly,
+(Plus two agentless tasks over the conversation-logs branch: [usage-fold](../claudinite-tasks/tasks/usage-fold/README.md) hourly,
 described below, and `logs-prune` — retention, [tasks/logs-prune/worker.mjs](tasks/logs-prune/worker.mjs).)
 
 ## Extraction is one task over two sources
@@ -36,7 +36,7 @@ described below, and `logs-prune` — retention, [tasks/logs-prune/worker.mjs](t
    whether any of it upgrades to a check before the PR opens.
 
 Everything lands in **one** PR, delivered to land where the repo's delivery settings allow
-(`engine/scheduler/deliver-pr.md`). The two extraction halves used to be two tasks firing in
+(`packs/claudinite-tasks/deliver-pr.md`). The two extraction halves used to be two tasks firing in
 the same nightly anchor against the same local packs; they share the lesson bar, the promotion ladder
 and the dedup surface ([extracting-lessons.md](extracting-lessons.md)), so the split bought nothing
 and cost a second opus dispatch, a second PR, and two runs deduping against a corpus the other was
@@ -75,7 +75,7 @@ GitHub MCP tools.
    session's previous capture, whatever event produced it, so any two events chain into
    disjoint files and a zero delta pushes nothing at all. Double-writing is therefore safe by
    construction, not by coordination — the property [`session-end.mjs`](session-end.mjs) relies
-   on, so `pack.test.mjs` pins it directly.
+   on, so `test/pack.test.mjs` pins it directly.
    The branch is a **work queue, not an archive** — never merged; tips are cheap in shallow
    session clones and retention keeps them bounded.
 1. **Capture — again, when the session ends** ([session-end.mjs](session-end.mjs), invoked by the
@@ -125,7 +125,7 @@ skill-vs-prose call had no empirical feedback: a skill whose trigger never fires
 one that fires daily, and a "skill" that loads in every session (rules wearing a skill's clothes)
 looked exactly like a genuinely activity-scoped one.
 
-The [usage-fold](tasks/usage-fold/README.md) task closes that loop — hourly, agentless, seconds. It
+The [usage-fold](../claudinite-tasks/tasks/usage-fold/README.md) task closes that loop — hourly, agentless, seconds. It
 counts skill loads **and their denominators** (captures, merges, sessions, user messages, user
 commands) out of the logs this pack already captures, into
 `.claudinite/local/usage.GENERATED.json`: day rows recomputed statelessly inside the raw retention
@@ -157,14 +157,15 @@ here: its subject is Claudinite's own surface, not lesson capture.
 
 | Rule | Severity | Reason | Enforcement |
 |---|---|---|---|
+| Changing a local pack automatically | high | complexity | prose: 65 words |
 | Wanting a job to run in Actions | high | complexity | prose: 55 words + check (`scheduler-workflow-shape`) |
 
 ## Coded rules
 
 | Rule | Kind | What |
 |---|---|---|
-| `dedup-prune-integrity` | work-scope ([dedup-integrity.mjs](dedup-integrity.mjs)) | a dedup edit only removes portable text — never grows a local pack or re-imports a canon rule |
-| `growth-write-scope` | work-scope ([growth-write-scope.mjs](growth-write-scope.mjs)) | a capture run (extract, dedup) writes only the repo's own local packs |
+| `dedup-prune-integrity` | work-scope ([dedup-integrity.mjs](workRules/dedup-integrity.mjs)) | a dedup edit only removes portable text — never grows a local pack or re-imports a canon rule |
+| `growth-write-scope` | work-scope ([growth-write-scope.mjs](workRules/growth-write-scope.mjs)) | a capture run (extract, dedup) writes only the repo's own local packs |
 
 The capture runs' write surface is the local packs and nothing else — a run improves the repo's
 **packs**, never the canon it prunes against or the project's own code. `growth-write-scope` is
@@ -192,19 +193,21 @@ each is a fact about a platform this repo does not control, and when it stops be
 here goes red. The prose keeps reading as authoritative, sessions keep obeying it, and the cost
 lands as a session spent on a route that closed.
 
-[rule-revalidation](tasks/rule-revalidation/task.md) is the weekly re-probe. It slices the corpus by
-longest-since-probed, **runs** the smallest read-only thing that would distinguish true from false
-for each environment-dependent claim, and corrects what the probe contradicts — in a reviewed PR
-whose body carries the probe evidence, since that is the one thing a reviewer cannot re-derive from
-the diff. Its scope is the same `pack_paths` config `prose-to-checks-sweep` reads, so a repo names
-its capture surface once.
+[rule-revalidation](tasks/rule-revalidation/task.md) is the weekly re-probe. It takes **every**
+environment-dependent claim in the capture surface — the judgment prose that makes up most of a pack
+is out of scope, so that set is far smaller than the corpus — **runs** the smallest read-only thing
+that would distinguish true from false for each, and corrects what the probe contradicts, in a
+reviewed PR whose body carries the probe evidence, since that is the one thing a reviewer cannot
+re-derive from the diff. Its scope is the same `pack_paths` config `prose-to-checks-sweep` reads, so
+a repo names its capture surface once. Covering the whole set every run is what lets the task hold
+no state between runs: there is no "what did I probe last time" to remember.
 
 The dangerous verdict is the one it refuses to reach. An executor session carries the reach its
 repo's routine was provisioned with, which is not the reach every rule was written under, so a probe
 that cannot run is logged **unprobed** and the rule is left untouched. Rewriting a rule into "you
 cannot do X" because one session could not is unfalsifiable afterwards and removes the capability
-from every future session — which is why the corpus each run touches is small and every verdict is
-logged on a standing tracker, including the ones that changed nothing.
+from every future session — which is why an unprobed
+claim is reported in the run's PR body as explicitly as a corrected one.
 
 ## Identifying a project's capture surface: its local packs (the same way in every stage)
 
@@ -232,6 +235,30 @@ and reads the same subtree over the GitHub API (get-file-contents under `.claudi
 Extract writes into it, promote reads from it, dedup prunes within it — all against the identical,
 `.claudinite/local_packs/`-rooted set.
 
+## The change record: each local pack's own `VERSIONS.md`
+
+A canon pack's `VERSIONS.md` carries one row per version bump. A local pack is neither versioned nor
+distributed, so its `VERSIONS.md` carries the same thing at the only granularity it has: **one row
+per change automatic work made to it** — a prose rule added or removed, a check created, a rule
+corrected against a probe or deleted as irrelevant.
+
+| Date | Task | Change |
+|---|---|---|
+| 2026-08-23 | `growth-extract` | Added: **Restoring source after a see-it-fail mutation** — `git checkout --`, never a `.bak`. |
+| 2026-08-23 | `prose-to-checks-sweep` | Converted to a check: the entry-point await rule → `pack-discovery-entry-await`. |
+
+Every growth task writes its own rows, in the same PR as the change they describe, so the record
+diffs beside what it records and travels with the pack it is about. A reader looking at a rule and
+wondering where it came from is already in the directory.
+
+This is the growth lifecycle's **whole** record: no growth task keeps a standing tracker issue. An
+issue body is rewritten in place with no history, sits outside the PR that made the change, and is
+one sweep away from being closed as stale — none of which is true of a tracked file. A run that
+changed nothing writes no row at all: the file logs what happened to the pack, never that a run
+happened.
+
+`seedRepoLocalPack` creates the file empty at adoption, so no task has to invent it.
+
 ## Checks
 
 | Check | Severity | Reason | Enforcement |
@@ -240,9 +267,7 @@ Extract writes into it, promote reads from it, dedup prunes within it — all ag
 | `growth-write-scope` | high | correctness | check: blocking |
 | `in-session-github-access` | high | correctness | check: blocking |
 | `routine-structure` | medium | complexity | check: blocking |
-| `task-declaration-shape` | high | correctness | check: blocking |
 | `task-declaration-matches-folder` | high | correctness | check: blocking |
-| `task-code-work-env` | high | correctness | check: blocking |
 | `task-md-only-when-agentic` | high | correctness | check: blocking |
 | `task-phase-discipline` | medium | complexity | check: advisory |
 
@@ -251,8 +276,6 @@ lives here because it judges whether a task is *written* correctly — authoring
 pack — and not whether Claudinite is *working* in the repo. Relevance-first: all five are inert until
 the repo carries a `tasks/<name>/task.mjs` of its own.
 
-- `task-declaration-shape` — a task declaration the scheduler reads is incomplete or illegal, so the task never fires or fires wrong.
 - `task-declaration-matches-folder` — a declaration disagrees with its folder: discovery drops it into `errors` and every run keeps reporting healthy without it.
-- `task-code-work-env` — a task reads a `CLAUDINITE_*` variable code-work never sets, so a parameter (a scope filter, a dry-run switch) silently never arrives and the run goes green in its most dangerous mode.
 - `task-md-only-when-agentic` — an agentless task carries a `task.md`, which the corpus reads as "an agent runs here": prose no session will ever open, judged by the routine contract and named by every work item as the file the run is about.
 - `task-phase-discipline` — a task decides not to run after its precondition already said run, hiding the decision from the run records.

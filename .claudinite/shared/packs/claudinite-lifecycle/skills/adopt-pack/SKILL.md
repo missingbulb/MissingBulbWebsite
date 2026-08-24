@@ -17,7 +17,7 @@ could be added. **Match the owner's plain-words name to a pack id yourself** bef
 disambiguate — pack ids rarely read like how people describe them, so read the candidate's entry
 there and confirm the fit.
 
-Add each chosen pack's id to `packs` in `.claudinite-checks.json`. A pack that only makes sense
+Add each chosen pack's id to `packs` in `.claudinite-settings.json`. A pack that only makes sense
 alongside another names it in `requires`; `resolveDeclaredPacks` pulls that closure in when the
 declaration is written, so you declare what you *chose* and its dependencies follow (e.g.
 `spec-driven-product` pulls `executable-requirements`). An unknown pack name — or an unknown
@@ -90,7 +90,7 @@ record in between.
 Then **refresh the README pack-badge row**, from the mount you just rebuilt:
 
 ```
-node .claudinite/shared/engine/scheduler/converge-wiring.mjs <owner/repo> --badges
+node .claudinite/shared/engine/converge-wiring.mjs <owner/repo> --badges
 ```
 
 Declaring a pack is what makes that row wrong, and adoption is the only moment anything derives it —
@@ -99,6 +99,21 @@ someone notices by eye. The converge rewrites the row in place between its
 `<!-- claudinite:packs -->` markers, keeping whatever the repo wrote after the closing one, and is a
 no-op when the row is already right. A repo that has deleted its row keeps it deleted only if you
 skip this — dropping the row is a real choice, so don't re-seed one the repo removed on purpose.
+
+**Adopting `claudinite-tasks` also scaffolds the two workflow files** — the scheduler run with
+its drain, and the label-event executor:
+
+```
+node .claudinite/shared/packs/claudinite-tasks/converge-workflows.mjs <owner/repo>
+```
+
+`.github/workflows/` is the one directory a member's nightly may never push to, so these arrive
+here or not at all. They are static from this moment: the cron minute is hashed from the repo's
+full name, both anchor hours come from its `taskScheduler.dailyHour`, and every `run:` names a
+mount path behind which the code converges nightly. The command is a no-op when both files are
+already right. A repo adopting this pack also needs its two CCR routine endpoints — the executor's
+and the work-item session's — pointed at `executor.md` and `queue/instructions.md` in its own
+mount; that is a console setting, so it belongs in the handover issue §4b files.
 
 ## 4. Scaffold what the pack now demands
 
@@ -130,7 +145,7 @@ review gate as any other change; it is never pushed straight to the default bran
 **A failing check is your work, not the reviewer's.** Declaring a pack is what switched those rules
 on, so every finding they now produce belongs to this change — fix it here, in the repo, before the
 PR opens. Two things that are *not* fixes: silencing a rule by adding it to `rules`/`accept` in
-`.claudinite-checks.json`, and undeclaring the pack to make the findings stop. Both turn a real
+`.claudinite-settings.json`, and undeclaring the pack to make the findings stop. Both turn a real
 signal off on the repo's first exposure to it. If a finding genuinely cannot be satisfied — the pack
 demands structure this repo has decided against — that is evidence the pack is **not** the right fit:
 drop it from the declaration, say why on the PR, and let the smaller adoption land.
