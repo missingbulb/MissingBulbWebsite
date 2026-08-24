@@ -166,7 +166,7 @@ the sink is a human's call:
 - [missingbulb GitHub organization](https://github.com/missingbulb) — re-read 2026-08-16 via the GitHub API for a second staleness check: still 16 repos, 12 public / 4 private, 0 stars and 0 forks throughout, 15/16 JavaScript, Claudinite now at 42 open issues (was 53 on 2026-08-02), no repo created since 2026-07-31.
 
 Owner-stated positioning is recorded verbatim in
-[`.claudinite-checks.json`](../../.claudinite-checks.json) on the `product-wiki`
+[`.claudinite-settings.json`](../../.claudinite-settings.json) on the `product-wiki`
 pack entry, and is attributable to the owner rather than to a citable source.
 
 ## Open questions
