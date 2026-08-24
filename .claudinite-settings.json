@@ -1,0 +1,69 @@
+{
+  "packs": [
+    {
+      "id": "basics",
+      "version": "60824.1"
+    },
+    {
+      "id": "barriers",
+      "version": "60823.1",
+      "via": [
+        "basics"
+      ]
+    },
+    {
+      "id": "git-github",
+      "version": "60822.2",
+      "via": [
+        "basics"
+      ]
+    },
+    {
+      "id": "claudinite-growth",
+      "version": "60824.1"
+    },
+    {
+      "id": "tidy-repo",
+      "version": "60824.1"
+    },
+    {
+      "id": "html",
+      "version": "60822.1"
+    },
+    {
+      "id": "product-wiki",
+      "version": "60824.1",
+      "answers": {
+        "product": "A static commercial website for Missing Bulb. It boasts about our projects, all of them in GitHub. We also do software, management, and AI consulting (and also AI Software Management consulting).",
+        "users": "People interested in the services of a software consultancy firm, about AI, about software development life cycle. and people who are interested in the projects that we build in Missing Bulb. It's hard to define because the audience is wide, so make sure you don't research the entire world.",
+        "market": "Software, management, and AI consulting — including AI Software Management consulting. Competitor set not yet named."
+      }
+    },
+    "local/session-tooling",
+    "local/site-copy",
+    "local/repo-mechanics",
+    {
+      "id": "claude-code-web-users-support",
+      "version": "60823.1",
+      "config": {
+        "repo": "missingbulb/Shepherd"
+      }
+    },
+    {
+      "id": "claudinite-lifecycle",
+      "version": "60824.3"
+    }
+  ],
+  "taskScheduler": {
+    "agenticTaskInvocationEndpoints": {
+      "default": {
+        "url": "https://api.anthropic.com/v1/claude_code/routines/trig_01BY8uYbgbuBzPwjGK4X4V9y/fire",
+        "tokenSecret": "CCR_ROUTINE_TOKEN"
+      }
+    },
+    "dailyHour": 4,
+    "weeklyDay": "Sun",
+    "monthlyDay": 1
+  },
+  "engineVersion": "60823.1"
+}

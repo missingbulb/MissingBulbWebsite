@@ -69,7 +69,7 @@ worker only frames the unattended run around it.
   whole run's prunes, not one per item — never a direct push. **Title the commit and the PR
   `Claudinite growth: dedup local packs`** — the `growth-write-scope` check keys on that title to certify the
   run pruned only the repo's local packs. Then **deliver it by the shared procedure —
-  [deliver-pr.md](../../../../engine/scheduler/deliver-pr.md)**. That procedure — never this file — owns every
+  [deliver-pr.md](../../../../packs/claudinite-tasks/deliver-pr.md)**. That procedure — never this file — owns every
   landing nuance: it reads this repo's `maintenance.delivery` (a `review` repo's PR waits for the owner — still
   a delivered outcome) and arms auto-merge where the repo allows it. Do not assume this run's PR merges
   unreviewed — that is the repo's setting, not this task's (the declared ceiling is `merged-pr`: it *may*
@@ -81,20 +81,16 @@ worker only frames the unattended run around it.
   none reds the repo's CI and blocks the merge.
 - If an edit touches something a test reads, run the repo's offline test suite and keep it green before pushing.
 
-## Tracking
+## The brief, and the record
 
-The task's standing log is the issue the work item's **Delivered by code-work** section names (`Issue: #<n>`).
-Code-work found or opened it and has already rewritten its body with this run's brief.
+Code-work has already posted **this window's canon diff** as a comment on your own work item — the issue you
+are reading. That comment is the brief this run starts from. **It is a required input**: a work item carrying
+no such comment is a failed run, not a lighter one, so converge to `needs-human` naming what is missing rather
+than re-deriving the window yourself.
 
-**That number is a required input.** A work item that does not carry it is a failed run, not a lighter one: converge to `needs-human` naming the missing input.
-Never search for a tracker by title and never create one — the brief
-you are working from lives on a specific issue, and any issue you find yourself is a different one. Never
-re-write the body code-work just wrote, and **never open, close, or reopen it**: its state carries no meaning,
-only the log does.
-
-Its **body** is code-work's, rewritten every run: this window's canon diff, the brief you started from. Leave it
-alone. The **comments** are yours: log each run that changed a doc as a **dated comment** — naming what was
-pruned and the canon line that now covers it. A run that prunes nothing logs nothing.
+Every rule this run actually prunes gets a row at the top of its pack's `VERSIONS.md` table, in the same commit
+as the prune: date, `growth-dedup`, what was removed and the canon line that now covers it. That file is the
+record — there is no standing issue, and a run that pruned nothing writes no row.
 
 ## Nothing downstream catches a wrong prune
 
@@ -108,7 +104,7 @@ what the run got wrong: a real lesson pruned on a claim the canon does not actua
 - **Never edit the read-only canon** — it only prunes the repo's *local packs* against it, and the
   `growth-write-scope` check reds a run that touches anything outside them.
 - **Never land a prune outside a PR** — every prune rides the run's single PR, delivered by
-  [deliver-pr.md](../../../../engine/scheduler/deliver-pr.md); a direct push to `main` is never in scope, and
+  [deliver-pr.md](../../../../packs/claudinite-tasks/deliver-pr.md); a direct push to `main` is never in scope, and
   neither is merging past a red check or a repo whose delivery setting says `review`.
 - **Never prune a local item without quoting the mounted-canon line (or covering check rule id) that covers
   it** — when unsure, leave it.

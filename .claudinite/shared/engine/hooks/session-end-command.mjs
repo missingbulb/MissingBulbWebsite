@@ -20,7 +20,7 @@
 // cloud container nobody is sitting in front of — ends when its container is
 // reclaimed, so the hook is exactly the firing that does not happen, and every one
 // of those sessions used to leave no record anywhere. So the executor runs this
-// runner itself as its last step (engine/scheduler/executor.md), naming the dispatch
+// runner itself as its last step, per its own operating instructions, naming the dispatch
 // issue in `CLAUDINITE_SESSION_ISSUE`. Steps must therefore tolerate being run
 // mid-session: the transcript is complete only up to the invocation, and the later
 // hook firing (when it happens at all) is a second event over the same session,
@@ -35,6 +35,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { hooklog } from '../checks/helpers/hook-log.mjs';
+import { settingsPath } from '../settings-file.mjs';
 
 // The step file an active pack contributes, if it ships one.
 export const STEP_FILE = 'session-end.mjs';
@@ -59,7 +60,7 @@ function hookInput() {
 
 async function main() {
   const input = hookInput();
-  const configPath = join(projectRoot, '.claudinite-checks.json');
+  const configPath = settingsPath(projectRoot);
   let config = { packs: [] };
   try { config = JSON.parse(readFileSync(configPath, 'utf8')); } catch { /* no declaration — no active packs */ }
 
