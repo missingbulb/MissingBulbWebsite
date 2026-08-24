@@ -9,7 +9,7 @@ small firm is read against.
 - 2026 market-size estimates for AI consulting span $11bn to $39bn — the firms disagree by more than 3x.
 - SMBs are the faster-growing segment, because the Fortune 500 already built internal AI teams.
 - North America is under 40% of the market, so the US-centric sources describe a minority of it.
-- Benchmark pricing for small-business AI work: $5k–$25k per project, or $150–$350 per hour.
+- Benchmark re-confirmed for 2026: $5k–$25k per project or $150–$350/hr, with a $75–$150/hr freelancer tier below it.
 - Outcome-based and capped-budget engagements beat hourly; shipping in weeks beats months of discovery.
 - Nobody else sells "AI Software Management"; the site now defines it in public, anchored on Claudinite.
 - Boutiques win on cost, speed and hands-on build, not breadth: that is the wedge against IBM and RSM.
@@ -106,6 +106,18 @@ On structure, the research is directional: firms winning in 2026 use
 and **deliver a working system in weeks rather than months of discovery**. Both
 favour a small team over a large one.
 
+**Re-checked 2026-08-24.** The $5k–$25k / $150–$350-per-hour benchmark, flagged as
+this page's one remaining unchecked figure since the first pass, holds: current
+2026 pricing write-ups still land small-business project work in that range. The
+re-check adds a tier the first pass didn't have — independent freelancers run
+**$75–$150/hr**, below the $150–$350/hr boutique-firm band this page already cites,
+with mid-tier firms at $300–$600/hr and enterprise/Big 4 senior staff higher still.
+An entry-level readiness assessment (a scoped first engagement, not a full project)
+runs **$2,000–$5,000**, and monthly retainers for ongoing phased work run
+**$2,000–$8,000**. None of this changes the page's existing figures; it narrows
+where Missing Bulb's own pricing, if it ever sets one for scoping conversations,
+would sit inside the boutique band rather than the freelancer or mid-tier ones.
+
 ## Market size
 
 **Superseded, 2026-08-09.** The previous pass recorded a single headline —
@@ -172,6 +184,8 @@ should not be read as describing the whole market.
 - [product-requirements](https://github.com/missingbulb/MissingBulbWebsite/blob/main/product-wiki/product-requirements/README.md) — requirements 1, 4 and 7, the owner's promoted decisions on defining the category, not publishing pricing, and excluding market-size figures from the site.
 - [`site/index.html`](https://github.com/missingbulb/MissingBulbWebsite/blob/main/site/index.html) — the shipped one-sentence definition of the category, quoted above.
 - [PR #17, Restructure the site around the AI Software Management practice](https://github.com/missingbulb/MissingBulbWebsite/pull/17) — where the definition landed and the pricing decision was made.
+- [AI Consultant Cost (2026): $150–$350/hr or $5K–$25K Project, AI Essentials](https://aiessentials.us/blog/how-much-does-it-cost-to-hire-an-ai-consultant-for-my-small) — 2026 re-confirmation of this page's existing boutique-tier benchmark.
+- [AI Consulting Rates in 2026: Hourly, Project & Retainer Costs, GroovyWeb](https://www.groovyweb.co/blog/ai-consulting-rates-2026) — the freelancer/boutique/mid-tier/enterprise rate tiers and the readiness-assessment and retainer figures.
 
 **Citation caveat, recorded rather than hidden:** the size, forecast, CAGR,
 segment-growth and pricing figures come from search-result summaries rather than
@@ -181,14 +195,14 @@ egress proxy**, which blocks direct fetches of every market-research domain
 listed above. Vendor-published market forecasts are promotional documents and
 habitually optimistic; the 2026-08-09 spread table is the concrete demonstration
 of why the *direction* (a growing category, SMB outpacing enterprise) is the only
-part safe to rely on. The pricing benchmarks ($5k–$25k, $150–$350/hr) were **not**
-re-checked this pass and still rest on the first pass's summaries.
+part safe to rely on. The pricing benchmarks were re-checked 2026-08-24 (still
+search-summary sourced, not read at source — same egress block) and confirmed
+rather than revised.
 
 ## Open questions
 
 - If the site cites a market size at all, whose definition of "AI consulting services" does it adopt? The 3.3x spread across firms makes an unattributed headline number indefensible.
 - Where does the unverified "$116.81bn by 2035" figure come from? No source found this pass reproduces it.
-- Re-verify the pricing benchmarks ($5k–$25k per project, $150–$350 per hour) — untouched since the first pass, and the only remaining figures on this page with a single unchecked origin.
 - Who are the *direct* competitors at Missing Bulb's actual size — one-to-five-person firms, not the roundup names?
 - Is there a geographic scope to this? Every source found is US-centric — and North America is only 38% of the market, so they describe a minority of it. Where does Missing Bulb actually sell?
 - Does anyone else now market the "AI agents do the engineering, humans govern" method as a named practice? Still no as of 2026-08-16 (two searches, no hits) — needs periodic re-checking, since a defined category invites imitation and a negative search never proves absence.
@@ -201,3 +215,4 @@ re-checked this pass and still rest on the first pass's summaries.
 - **2026-08-09** — re-verification pass against this page's top open question (the market-size figures), which superseded them. The "$14.1bn in 2026 / ~26.5% CAGR" headline was misattributed: Fortune Business Insights publishes $11.91bn → $73.89bn by 2034 at 25.6%, while the $14.08bn / 26.49% pairing is Business Research Insights'. The "$116.81bn by 2035" endpoint could not be reproduced from any source found and is marked unverified rather than deleted. The larger finding is that four firms' 2026 estimates span $11.91bn–$38.7bn (3.3x) with CAGRs from 18.4% to 35.8%, so the page now says no unattributed headline number is quotable — a better answer to "re-verify at source" than a confirmation would have been. Re-confirmed the 25.7% SMB segment growth, which is unaffected. Added North America at 38.13% of 2025 market share, which partly answers the geography question: the sources' US focus describes under 40% of the category. Header's market-size bullet rewritten to the spread; geography bullet added. Pricing benchmarks flagged as the remaining unchecked figures. Egress-block cause corrected in the citation caveat.
 - **2026-08-02** — reconciliation pass, prompted by the product-wiki tree moving in the window. No new market research; the change is that three of this page's open questions were decided off-wiki by the owner's 2026-07-31 requirements promotion (PR #17), and the page said nothing about it. **The wedge question is answered:** the site now leads with the AI Software Management practice and subordinates the other three. **The definition question is answered:** requirement 1 mandated a one-sentence hero definition and the shipped copy defines the category as a method — AI agents engineering under human governance — anchored on Claudinite, which is now recorded here verbatim. **The pricing question is answered no**, against this page's own suggestion: requirement 4 rules out published pricing and requirement 7 bars market-size figures from the site, so this page's pricing and sizing research is input to scoping and positioning rather than to copy. Recorded the decline plainly rather than quietly dropping the recommendation. Added a re-check question on whether the coinage is still unclaimed, and one on what a buyer is told about cost now that the site says nothing.
 - **2026-08-16** — weekly spot-check on the standing "has anyone claimed the coinage" question. Two searches (`"AI Software Management" consulting`, and competitors framing an AI-agents-engineer/humans-govern method) found no firm using either as a named practice — the same negative result as the first pass, now reconfirmed. No header change: this is a reconfirmation, not new information, and the open question stays open since a negative search is not proof.
+- **2026-08-24** — weekly spot-check on this page's one remaining unchecked figure, the pricing benchmarks (flagged since the first pass). The $5k–$25k / $150–$350-per-hour boutique-tier range still holds in current 2026 sources — no correction. Added a tier the first pass didn't capture: independent freelancers at $75–$150/hr below the boutique band, mid-tier firms at $300–$600/hr, a $2k–$5k entry-level readiness-assessment price point, and $2k–$8k/month retainers. Header bullet reworded to "re-confirmed" and to carry the new freelancer tier. Removed the now-answered "re-verify pricing benchmarks" open question.
