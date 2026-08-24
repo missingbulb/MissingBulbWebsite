@@ -44,10 +44,12 @@ The trap is that the obvious knob is the wrong one. On 2026-08-12 a session call
 later with `per_page: 3` — **exactly 395,103 characters both times.** `per_page` does not
 shrink these payloads; the per-object field set does. So:
 
-- Pass a **`fields` subset** on every `search_issues` / `list_issues` / `search_repositories`
-  call — `["number","title","state"]` is enough for almost everything Claudinite tasks do.
+- Pass a **`fields` subset** on every `search_issues` / `list_issues` call —
+  `["number","title","state"]` is enough for almost everything Claudinite tasks do.
   Dropping `body` alone is usually the whole difference; the same session's third
-  `search_issues` call, identical but for `fields`, came back fine.
+  `search_issues` call, identical but for `fields`, came back fine. `search_repositories`
+  has no `fields` param at all — its knob is `minimal_output` (default `true`, already the
+  small shape); pass `minimal_output: false` only when full objects are actually needed.
 - `actions_list` has **no `fields` and no `minimal_output`** — `per_page` is its only knob and
   it doesn't work. Don't retry it smaller. Either narrow with `workflow_runs_filter`, or take
   the overflow as the answer and query the spilled file directly
@@ -82,10 +84,6 @@ publishes $11.91bn / 25.6%. Corroborating a figure across several snippets does 
 corroborate **who published it** — the snippets quote each other. When you cannot open
 the report, attribute a number to the firm a source explicitly names as its origin,
 and when sources disagree about that, say so rather than picking one.
-
-**`codeload.github.com` is blocked here too** — `curl … | tar -xz` of a repo
-tarball returns 403. Use `git clone --depth 1 https://github.com/<owner>/<repo>`,
-which works through the proxy and yields the same tree.
 
 ## `enable_pr_auto_merge` can never arm in this repo — skip straight to a direct merge
 
@@ -188,9 +186,11 @@ two days paid for this:
 
 So: when you already know the title, call `list_issues` with
 `fields: ["number","title"]` and `perPage: 100`, **no `state` filter** — this repo's
-trackers are closed by design — and match the string yourself in the session. All 80
-issues come back in one call, well inside the cap. Reserve `search_issues` for what it
-is actually good at: finding issues you can only describe, not ones you can name.
+trackers are closed by design — and match the string yourself in the session. The issue
+count keeps growing (131 as of 2026-08-24, already past one page), so check
+`pageInfo.hasNextPage` and follow `endCursor` into a second page with `after` before
+concluding a title isn't there. Reserve `search_issues` for what it is actually good at:
+finding issues you can only describe, not ones you can name.
 
 The canon `git-github` pack's advice to anchor with `in:title "<exact title>"` is about
 GitHub's own search API; it does not carry to this MCP server's semantic tool.
