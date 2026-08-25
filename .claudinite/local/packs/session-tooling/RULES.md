@@ -25,6 +25,9 @@ shrink these payloads; the per-object field set does. So:
   That fallback is what finally worked, ~35s after the first attempt.
 - For a PR, prefer the narrow method (`get_files`, `get_commits`, `get_check_runs`) over
   `get`, whose body plus every field is what overflows.
+- `issue_read`'s `get_comments` method has the same no-`fields` shape as `actions_list` — a
+  2026-08-24 session hit 66KB reading one issue's comments and spilled. Same fallback: read
+  the spilled `tool-results/*.txt` file directly rather than retrying.
 
 ## `codeload.github.com` is blocked here too
 
@@ -62,6 +65,54 @@ on 2026-08-01:
 So: when the engine's own comments point at a doc, check it exists before
 hunting for it, and re-run a runner with `; echo "EXIT:$?"` **once** — the exit
 code is the whole answer, and no output is the good outcome.
+
+## `converge-item.mjs` never runs from an agent session — cite #227, don't re-diagnose
+
+Every dispatched work item's queue step 6 tells the session to run `converge-item.mjs`, and
+every agent session that's tried it so far has hit the same wall: `GITHUB_REPOSITORY is not
+set`, then — after guessing env vars — a raw `401`/`403` on any direct REST call. This
+session type carries no repo-scoped REST token, only the GitHub MCP tools (filed as #227,
+open since 2026-08-24). Four sessions on 2026-08-24 each re-diagnosed it from scratch —
+reading `converge-item.mjs`/`gh.mjs`/`work-item.mjs`/`run-record.mjs`, dumping env vars,
+`curl`/raw-`fetch`ing `api.github.com` directly — costing 1m30s–8m40s apiece (issues #204,
+#207, #220, #203). A fifth session (#239) checked #227 first and was done in 42s.
+
+So: on the first `converge-item.mjs` failure (`GITHUB_REPOSITORY is not set`, or a bare
+`#N could not be read`), don't chase credentials or read engine internals — that's this
+known limitation, not a misconfiguration to fix. Cite #227 and follow the queue's own
+current instructions for an item that can't converge in code; #227 itself is the open
+decision on whether/how a session converges by hand, so don't re-litigate that each time.
+
+## Verifying "checks are clean" needs the Stop hook's own runner, not the CI one
+
+`check_the_world.mjs` and `check_the_work.mjs` share no code and cover disjoint rule scopes:
+the world runner only sees `scope !== 'work'` rules and is wired to CI, never Stop; the Stop
+hook runs the work runner (`scope: 'work'` — the diff-plus-transcript rules, where
+`reference-integrity` lives). A session (issue #208, 2026-08-24) ran `check_the_world.mjs`,
+declared "checks are clean," and committed — then Stop blocked anyway on a
+`reference-integrity` finding in a file the session had never touched, forcing a second
+commit, push and session-capture cycle. Verify with `check_the_work.mjs` when the question
+is "will Stop block me," never the world runner.
+
+## One empty `ToolSearch` result is enough for a small, fixed tool roster — don't reword and retry
+
+Probing whether the GitHub MCP server exposes a branch-protection read, a session (#208,
+2026-08-24) issued four separately-worded `ToolSearch` queries in a row — "branch protection
+repository rules", "get_repository repository settings default branch protection rules",
+"repository rules ruleset get branch", "repository settings merge method allow squash rebase"
+— every one empty, 2m39s spent rephrasing before pivoting to `WebSearch` and leaving the
+claim unprobed anyway. The GitHub MCP server's tool roster is small and fixed (the
+deferred-tools listing at session start names all of it); one empty result there is already
+the answer for a capability search like this one — conclude "no read-only tool for this" and
+move on rather than trying keyword variations.
+
+## Don't cite a not-yet-filed issue's number — comments here can't be edited afterward
+
+A session (#207, 2026-08-24) wrote "filed as a dedicated issue: #222" in a comment, then
+created the issue a call later and got #227 instead. GitHub issue comments have no edit path
+through this toolset (a `ToolSearch` for one came back empty), so fixing the wrong number cost
+a second, correcting comment. File the issue first, read back the real number it returns,
+then write anything that cites it — never guess ahead.
 
 ## Never publish an unverified fact about a real person
 
