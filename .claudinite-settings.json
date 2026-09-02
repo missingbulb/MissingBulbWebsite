@@ -2,7 +2,7 @@
   "packs": [
     {
       "id": "basics",
-      "version": "60901.5"
+      "version": "60902.2"
     },
     {
       "id": "barriers",
@@ -20,11 +20,11 @@
     },
     {
       "id": "claudinite-growth",
-      "version": "60901.3"
+      "version": "60902.1"
     },
     {
       "id": "tidy-repo",
-      "version": "60830.3"
+      "version": "60902.1"
     },
     {
       "id": "html",
@@ -32,7 +32,7 @@
     },
     {
       "id": "product-wiki",
-      "version": "60830.3",
+      "version": "60902.1",
       "answers": {
         "product": "A static commercial website for Missing Bulb. It boasts about our projects, all of them in GitHub. We also do software, management, and AI consulting (and also AI Software Management consulting).",
         "users": "People interested in the services of a software consultancy firm, about AI, about software development life cycle. and people who are interested in the projects that we build in Missing Bulb. It's hard to define because the audience is wide, so make sure you don't research the entire world.",
@@ -51,11 +51,11 @@
     },
     {
       "id": "claudinite-lifecycle",
-      "version": "60901.2"
+      "version": "60902.1"
     },
     {
       "id": "claudinite-tasks",
-      "version": "60901.2"
+      "version": "60902.2"
     }
   ],
   "taskScheduler": {
