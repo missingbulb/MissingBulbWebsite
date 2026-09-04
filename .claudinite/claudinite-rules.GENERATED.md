@@ -5,6 +5,4 @@
 @shared/packs/claudinite-lifecycle/RULES.md
 @shared/packs/html/RULES.md
 @shared/packs/product-wiki/RULES.md
-@local/packs/repo-mechanics/RULES.md
-@local/packs/session-tooling/RULES.md
-@local/packs/site-copy/RULES.md
+@local/packs/missingbulb-website/RULES.md
