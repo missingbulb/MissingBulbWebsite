@@ -39,9 +39,7 @@
         "market": "Software, management, and AI consulting — including AI Software Management consulting. Competitor set not yet named."
       }
     },
-    "local/session-tooling",
-    "local/site-copy",
-    "local/repo-mechanics",
+    "local/missingbulb-website",
     {
       "id": "claude-code-web-users-support",
       "version": "60902.1",

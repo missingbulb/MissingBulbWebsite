@@ -1,6 +1,13 @@
-# session-tooling — rules
+# missingbulb-website — this repo's own rules
 
-## A GitHub MCP list read blows the token cap — `fields` is the size knob, not `per_page`
+The lessons this repo has paid for once, in two surfaces: how the session tooling behaves
+here, and what the site's user-facing copy has to stay true to. A lesson that would hold in
+another repo does not belong here — propose it to the Claudinite canon instead, where every
+repo gets it.
+
+## Session tooling
+
+### A GitHub MCP list read blows the token cap — `fields` is the size knob, not `per_page`
 
 Any `mcp__github__*` read that returns a *list* of objects here returns the objects whole,
 and the result is routinely 80KB–400KB — over the cap, so nothing reaches the session and
@@ -29,20 +36,20 @@ shrink these payloads; the per-object field set does. So:
   2026-08-24 session hit 66KB reading one issue's comments and spilled. Same fallback: read
   the spilled `tool-results/*.txt` file directly rather than retrying.
 
-## `codeload.github.com` is blocked here too
+### `codeload.github.com` is blocked here too
 
 `curl … | tar -xz` of a repo tarball returns 403 through the network egress proxy. Use
 `git clone --depth 1 https://github.com/<owner>/<repo>` instead, which works through the
 proxy and yields the same tree.
 
-## `enable_pr_auto_merge` never arms here — skip straight to a direct merge
+### `enable_pr_auto_merge` never arms here — skip straight to a direct merge
 
 When the task's own spec authorizes landing without human review (the growth tasks do),
 don't retry `enable_pr_auto_merge` — poll `pull_request_read` `get_check_runs` until the
 required check *completes* successfully, then `merge_pull_request` with `squash` directly.
 Escalate `needs-human` only when the task requires a reviewer.
 
-## The mounted `.claudinite/shared/` is code without docs — and its runners are silent when clean
+### The mounted `.claudinite/shared/` is code without docs — and its runners are silent when clean
 
 Two ways the engine mount misleads a session that goes reading it, both paid for
 on 2026-08-01:
@@ -66,7 +73,7 @@ So: when the engine's own comments point at a doc, check it exists before
 hunting for it, and re-run a runner with `; echo "EXIT:$?"` **once** — the exit
 code is the whole answer, and no output is the good outcome.
 
-## `converge-item.mjs` never runs from an agent session — cite #227, don't re-diagnose
+### `converge-item.mjs` never runs from an agent session — cite #227, don't re-diagnose
 
 Every dispatched work item's queue step 6 tells the session to run `converge-item.mjs`, and
 every agent session that's tried it so far has hit the same wall: `GITHUB_REPOSITORY is not
@@ -83,7 +90,7 @@ known limitation, not a misconfiguration to fix. Cite #227 and follow the queue'
 current instructions for an item that can't converge in code; #227 itself is the open
 decision on whether/how a session converges by hand, so don't re-litigate that each time.
 
-## Verifying "checks are clean" needs the Stop hook's own runner, not the CI one
+### Verifying "checks are clean" needs the Stop hook's own runner, not the CI one
 
 `check_the_world.mjs` and `check_the_work.mjs` share no code and cover disjoint rule scopes:
 the world runner only sees `scope !== 'work'` rules and is wired to CI, never Stop; the Stop
@@ -94,7 +101,7 @@ declared "checks are clean," and committed — then Stop blocked anyway on a
 commit, push and session-capture cycle. Verify with `check_the_work.mjs` when the question
 is "will Stop block me," never the world runner.
 
-## One empty `ToolSearch` result is enough for a small, fixed tool roster — don't reword and retry
+### One empty `ToolSearch` result settles a small, fixed roster — don't reword and retry
 
 Probing whether the GitHub MCP server exposes a branch-protection read, a session (#208,
 2026-08-24) issued four separately-worded `ToolSearch` queries in a row — "branch protection
@@ -106,7 +113,7 @@ deferred-tools listing at session start names all of it); one empty result there
 the answer for a capability search like this one — conclude "no read-only tool for this" and
 move on rather than trying keyword variations.
 
-## Don't cite a not-yet-filed issue's number — comments here can't be edited afterward
+### Don't cite a not-yet-filed issue's number — comments here can't be edited afterward
 
 A session (#207, 2026-08-24) wrote "filed as a dedicated issue: #222" in a comment, then
 created the issue a call later and got #227 instead. GitHub issue comments have no edit path
@@ -114,7 +121,7 @@ through this toolset (a `ToolSearch` for one came back empty), so fixing the wro
 a second, correcting comment. File the issue first, read back the real number it returns,
 then write anything that cites it — never guess ahead.
 
-## Never publish an unverified fact about a real person
+### Never publish an unverified fact about a real person
 
 When the primary source for a person's background is blocked, **do not substitute a
 data broker, and do not publish the claim with a caveat** — ask the owner.
@@ -132,3 +139,18 @@ paragraph — it is a public claim about a named person that they never made. Th
 is in the conversation; one question is cheaper than any research. (The site-specific
 form of this now sits in `product-wiki/product-requirements/` as a reviewed
 requirement; this rule is the general one, for any repo and any surface.)
+
+## Site copy
+
+### Lead with what the site actually does, then the narrower true claims
+
+PR #20 added Cloudflare Web Analytics (visit counting) and shipped `privacy.html`
+in the same commit — but the page's first draft still led with *"no cookies, no
+tracking, no personal data,"* a claim the very commit adding it had just made
+false. Review caught it before merge: the lede was rewritten to state what's
+actually measured first, plainly say the site is **not** analytics-free, and keep
+the narrower claims (no cross-site tracking, no ads, no cookies set by us) only
+where they remain true.
+
+So: lead with what is actually done, then the narrower true claims — never a
+blanket denial the new behavior no longer supports.
