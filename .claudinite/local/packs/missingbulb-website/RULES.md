@@ -21,10 +21,12 @@ The trap is that the obvious knob is the wrong one. On 2026-08-12 a session call
 later with `per_page: 3` — **exactly 395,103 characters both times.** `per_page` does not
 shrink these payloads; the per-object field set does. So:
 
-- Pass a **`fields` subset** on every `search_issues` / `list_issues` / `search_repositories`
-  call — `["number","title","state"]` is enough for almost everything Claudinite tasks do.
+- Pass a **`fields` subset** on every `search_issues` / `list_issues` call —
+  `["number","title","state"]` is enough for almost everything Claudinite tasks do.
   Dropping `body` alone is usually the whole difference; the same session's third
   `search_issues` call, identical but for `fields`, came back fine.
+- `search_repositories` has no `fields` parameter — its knob is `minimal_output`,
+  which now defaults to `true` and already returns compact objects without asking.
 - `actions_list` has **no `fields` and no `minimal_output`** — `per_page` is its only knob and
   it doesn't work. Don't retry it smaller. Either narrow with `workflow_runs_filter`, or take
   the overflow as the answer and query the spilled file directly
@@ -35,12 +37,6 @@ shrink these payloads; the per-object field set does. So:
 - `issue_read`'s `get_comments` method has the same no-`fields` shape as `actions_list` — a
   2026-08-24 session hit 66KB reading one issue's comments and spilled. Same fallback: read
   the spilled `tool-results/*.txt` file directly rather than retrying.
-
-### `codeload.github.com` is blocked here too
-
-`curl … | tar -xz` of a repo tarball returns 403 through the network egress proxy. Use
-`git clone --depth 1 https://github.com/<owner>/<repo>` instead, which works through the
-proxy and yields the same tree.
 
 ### `enable_pr_auto_merge` never arms here — skip straight to a direct merge
 
