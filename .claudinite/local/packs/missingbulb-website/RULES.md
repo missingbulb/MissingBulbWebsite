@@ -69,22 +69,17 @@ So: when the engine's own comments point at a doc, check it exists before
 hunting for it, and re-run a runner with `; echo "EXIT:$?"` **once** — the exit
 code is the whole answer, and no output is the good outcome.
 
-### `converge-item.mjs` never runs from an agent session — cite #227, don't re-diagnose
+### `converge-item.mjs` needs `--repo` and `--item-file` — it no longer touches GitHub itself
 
-Every dispatched work item's queue step 6 tells the session to run `converge-item.mjs`, and
-every agent session that's tried it so far has hit the same wall: `GITHUB_REPOSITORY is not
-set`, then — after guessing env vars — a raw `401`/`403` on any direct REST call. This
-session type carries no repo-scoped REST token, only the GitHub MCP tools (filed as #227,
-open since 2026-08-24). Four sessions on 2026-08-24 each re-diagnosed it from scratch —
-reading `converge-item.mjs`/`gh.mjs`/`work-item.mjs`/`run-record.mjs`, dumping env vars,
-`curl`/raw-`fetch`ing `api.github.com` directly — costing 1m30s–8m40s apiece (issues #204,
-#207, #220, #203). A fifth session (#239) checked #227 first and was done in 42s.
-
-So: on the first `converge-item.mjs` failure (`GITHUB_REPOSITORY is not set`, or a bare
-`#N could not be read`), don't chase credentials or read engine internals — that's this
-known limitation, not a misconfiguration to fix. Cite #227 and follow the queue's own
-current instructions for an item that can't converge in code; #227 itself is the open
-decision on whether/how a session converges by hand, so don't re-litigate that each time.
+The wall four sessions hit on 2026-08-24 (`GITHUB_REPOSITORY is not set`, then a raw `401`/
+`403` on `api.github.com` — this session type carries no repo-scoped REST token, only the
+GitHub MCP tools; filed as #227) is gone: run it exactly as the queue's current
+`instructions.md` step 6 shows — `issue_read` the item yourself first, save it as JSON, then
+pass both `--repo <owner/name>` and `--item-file <that path>`. Confirmed working end-to-end,
+network-free, on 2026-09-06 (#327): the script only computes and prints the GitHub calls to
+make, never places them itself, so it needs no token at all. Direct REST (`curl
+api.github.com`) is still blocked here — that part of #227 stands — but the script itself no
+longer needs it.
 
 ### Verifying "checks are clean" needs the Stop hook's own runner, not the CI one
 
