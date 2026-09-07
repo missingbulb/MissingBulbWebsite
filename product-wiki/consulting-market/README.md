@@ -11,7 +11,7 @@ small firm is read against.
 - North America is under 40% of the market, so the US-centric sources describe a minority of it.
 - Benchmark re-confirmed for 2026: $5k–$25k per project or $150–$350/hr, with a $75–$150/hr freelancer tier below it.
 - Outcome-based and capped-budget engagements beat hourly; shipping in weeks beats months of discovery.
-- Nobody else sells "AI Software Management"; the site now defines it in public, anchored on Claudinite.
+- Nobody else sells "AI Software Management"; a close but distinct term, "governed AI engineering," is emerging elsewhere.
 - Boutiques win on cost, speed and hands-on build, not breadth: that is the wedge against IBM and RSM.
 
 ## Category as stated
@@ -82,6 +82,24 @@ under human governance surfaced no firm using either as a named practice — the
 same result as the first pass. A negative search is not proof of absence, so the
 open question below stays open, but the coinage is still unclaimed as far as this
 wiki can see.
+
+**Re-checked 2026-09-07.** The exact phrase `"AI Software Management" consulting
+practice` still surfaces no firm using it as a named practice — the same negative
+result as the two prior checks. But a broader search for the underlying idea
+(AI agents doing engineering work under governance) surfaces a term that did not
+appear in the earlier searches: **"governed AI engineering."** A vendor blog
+([DeployFlow, "What is Governed AI Engineering and Why UK CTOs Should Care"](https://deployflow.co/blog/governed-ai-engineering/))
+and an academic paper
+([arXiv:2606.22484, "Governed AI-Assisted Engineering: Graduated Human Oversight
+for Agentic Code Generation in Regulated Domains"](https://arxiv.org/pdf/2606.22484))
+both use it. The definition that recurs — "using AI inside clear delivery,
+security and review controls," with humans reviewing and approving AI-assisted
+output — is a **weaker claim than Missing Bulb's**: it describes AI as a tool
+engineers use under oversight, not agents that do the engineering with humans
+governing the result. Adjacent, not identical, so the coinage itself is still
+unclaimed — but it is the first evidence this wiki has found of the surrounding
+idea getting a name anywhere, worth tracking rather than dismissing as another
+negative result.
 
 **Answered 2026-07-31 — and against this page's suggestion.** The pricing
 question ("should the site publish a starting price, given the category norm is
@@ -186,6 +204,8 @@ should not be read as describing the whole market.
 - [PR #17, Restructure the site around the AI Software Management practice](https://github.com/missingbulb/MissingBulbWebsite/pull/17) — where the definition landed and the pricing decision was made.
 - [AI Consultant Cost (2026): $150–$350/hr or $5K–$25K Project, AI Essentials](https://aiessentials.us/blog/how-much-does-it-cost-to-hire-an-ai-consultant-for-my-small) — 2026 re-confirmation of this page's existing boutique-tier benchmark.
 - [AI Consulting Rates in 2026: Hourly, Project & Retainer Costs, GroovyWeb](https://www.groovyweb.co/blog/ai-consulting-rates-2026) — the freelancer/boutique/mid-tier/enterprise rate tiers and the readiness-assessment and retainer figures.
+- [What is Governed AI Engineering and Why UK CTOs Should Care, DeployFlow](https://deployflow.co/blog/governed-ai-engineering/) — the closest term found to date to Missing Bulb's coinage, and a weaker claim than it.
+- [Governed AI-Assisted Engineering: Graduated Human Oversight for Agentic Code Generation in Regulated Domains, arXiv:2606.22484](https://arxiv.org/pdf/2606.22484) — academic use of the same adjacent term.
 
 **Citation caveat, recorded rather than hidden:** the size, forecast, CAGR,
 segment-growth and pricing figures come from search-result summaries rather than
@@ -205,7 +225,7 @@ rather than revised.
 - Where does the unverified "$116.81bn by 2035" figure come from? No source found this pass reproduces it.
 - Who are the *direct* competitors at Missing Bulb's actual size — one-to-five-person firms, not the roundup names?
 - Is there a geographic scope to this? Every source found is US-centric — and North America is only 38% of the market, so they describe a minority of it. Where does Missing Bulb actually sell?
-- Does anyone else now market the "AI agents do the engineering, humans govern" method as a named practice? Still no as of 2026-08-16 (two searches, no hits) — needs periodic re-checking, since a defined category invites imitation and a negative search never proves absence.
+- Does anyone else now market the "AI agents do the engineering, humans govern" method as a named practice under that exact framing? Still no as of 2026-09-07 — but "governed AI engineering" is now in use for the adjacent, weaker idea (a vendor blog and an academic paper), so re-check whether that term's usage sharpens toward Missing Bulb's stronger claim, not just whether the exact coinage appears.
 - With pricing kept off the site, what is the scoping script — what does a buyer get told about cost, and when?
 
 ## Growth log
@@ -216,3 +236,4 @@ rather than revised.
 - **2026-08-02** — reconciliation pass, prompted by the product-wiki tree moving in the window. No new market research; the change is that three of this page's open questions were decided off-wiki by the owner's 2026-07-31 requirements promotion (PR #17), and the page said nothing about it. **The wedge question is answered:** the site now leads with the AI Software Management practice and subordinates the other three. **The definition question is answered:** requirement 1 mandated a one-sentence hero definition and the shipped copy defines the category as a method — AI agents engineering under human governance — anchored on Claudinite, which is now recorded here verbatim. **The pricing question is answered no**, against this page's own suggestion: requirement 4 rules out published pricing and requirement 7 bars market-size figures from the site, so this page's pricing and sizing research is input to scoping and positioning rather than to copy. Recorded the decline plainly rather than quietly dropping the recommendation. Added a re-check question on whether the coinage is still unclaimed, and one on what a buyer is told about cost now that the site says nothing.
 - **2026-08-16** — weekly spot-check on the standing "has anyone claimed the coinage" question. Two searches (`"AI Software Management" consulting`, and competitors framing an AI-agents-engineer/humans-govern method) found no firm using either as a named practice — the same negative result as the first pass, now reconfirmed. No header change: this is a reconfirmation, not new information, and the open question stays open since a negative search is not proof.
 - **2026-08-24** — weekly spot-check on this page's one remaining unchecked figure, the pricing benchmarks (flagged since the first pass). The $5k–$25k / $150–$350-per-hour boutique-tier range still holds in current 2026 sources — no correction. Added a tier the first pass didn't capture: independent freelancers at $75–$150/hr below the boutique band, mid-tier firms at $300–$600/hr, a $2k–$5k entry-level readiness-assessment price point, and $2k–$8k/month retainers. Header bullet reworded to "re-confirmed" and to carry the new freelancer tier. Removed the now-answered "re-verify pricing benchmarks" open question.
+- **2026-09-07** — weekly spot-check on the standing "has anyone claimed the coinage" question, the third such check. The exact phrase is still unclaimed — but a broader search surfaced "governed AI engineering," a term now used by a vendor blog and an academic paper for a related but weaker idea (AI as a reviewed tool, not an agent that does the engineering). Recorded as the first evidence of the surrounding space getting named, not as the coinage being claimed. Header bullet reworded to name the adjacent term rather than repeat the flat "nobody else sells this." Open question sharpened to track whether that term's usage moves toward Missing Bulb's stronger claim.
