@@ -1,0 +1,16 @@
+[
+  {
+    "id": "github-list-read-no-fields",
+    "severity": "advisory",
+    "scope": "action",
+    "failureMessage": "search_issues and list_issues return every object whole with no `fields` subset — the payload routinely blows the token cap and spills to a tool-results file instead of reaching the session",
+    "guardToolCalls": [
+      {
+        "tool": "/^mcp__github__(search_issues|list_issues)$/",
+        "inputFieldAbsent": ["fields"],
+        "what": "a {tool} call with no `fields` subset",
+        "fix": "pass fields (e.g. [\"number\",\"title\",\"state\"]) — dropping `body` alone is usually the whole difference"
+      }
+    ]
+  }
+]
