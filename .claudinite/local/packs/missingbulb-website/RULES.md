@@ -38,49 +38,6 @@ shrink these payloads; the per-object field set does. So:
   2026-08-24 session hit 66KB reading one issue's comments and spilled. Same fallback: read
   the spilled `tool-results/*.txt` file directly rather than retrying.
 
-### `enable_pr_auto_merge` never arms here — skip straight to a direct merge
-
-When the task's own spec authorizes landing without human review (the growth tasks do),
-don't retry `enable_pr_auto_merge` — poll `pull_request_read` `get_check_runs` until the
-required check *completes* successfully, then `merge_pull_request` with `squash` directly.
-Escalate `needs-human` only when the task requires a reviewer.
-
-### The mounted `.claudinite/shared/` is code without docs — and its runners are silent when clean
-
-Two ways the engine mount misleads a session that goes reading it, both paid for
-on 2026-08-01:
-
-- **The `DESIGN.md` it cites is not vendored here.** Engine source refers to it
-  constantly (`// World-scope conformance runner (see DESIGN.md)`,
-  `// … (per-project-scheduling DESIGN §1, §5.5)`), but
-  `find .claudinite -iname 'DESIGN*'` returns nothing — the mount carries
-  `.mjs` and pack docs only. Session `000d1bf8` chased it twice independently:
-  the executor spent 05:00:52→05:01:00 on a failed `Read` plus two `find`s, then
-  its subagent repeated the same hunt at 05:02:23→05:02:26. ~25s and five calls
-  for a file that was never there. Read the module header comment instead — it
-  restates what the missing section would have said.
-- **A clean check run prints nothing at all.** `check_the_world.mjs` on a green
-  repo emits zero output and exits `0`; `report-findings.mjs` only prints when
-  there are findings. Session `055f2992` had `EXIT:0` in hand at 05:01:40 and
-  still spent 05:01:42→05:02:12 — four more calls, `--help`, `head`, `tail`,
-  `grep`, a full `Read` — confirming that silence meant success.
-
-So: when the engine's own comments point at a doc, check it exists before
-hunting for it, and re-run a runner with `; echo "EXIT:$?"` **once** — the exit
-code is the whole answer, and no output is the good outcome.
-
-### `converge-item.mjs` needs `--repo` and `--item-file` — it no longer touches GitHub itself
-
-The wall four sessions hit on 2026-08-24 (`GITHUB_REPOSITORY is not set`, then a raw `401`/
-`403` on `api.github.com` — this session type carries no repo-scoped REST token, only the
-GitHub MCP tools; filed as #227) is gone: run it exactly as the queue's current
-`instructions.md` step 6 shows — `issue_read` the item yourself first, save it as JSON, then
-pass both `--repo <owner/name>` and `--item-file <that path>`. Confirmed working end-to-end,
-network-free, on 2026-09-06 (#327): the script only computes and prints the GitHub calls to
-make, never places them itself, so it needs no token at all. Direct REST (`curl
-api.github.com`) is still blocked here — that part of #227 stands — but the script itself no
-longer needs it.
-
 ### Verifying "checks are clean" needs the Stop hook's own runner, not the CI one
 
 `check_the_world.mjs` and `check_the_work.mjs` share no code and cover disjoint rule scopes:
@@ -92,18 +49,6 @@ declared "checks are clean," and committed — then Stop blocked anyway on a
 commit, push and session-capture cycle. Verify with `check_the_work.mjs` when the question
 is "will Stop block me," never the world runner.
 
-### One empty `ToolSearch` result settles a small, fixed roster — don't reword and retry
-
-Probing whether the GitHub MCP server exposes a branch-protection read, a session (#208,
-2026-08-24) issued four separately-worded `ToolSearch` queries in a row — "branch protection
-repository rules", "get_repository repository settings default branch protection rules",
-"repository rules ruleset get branch", "repository settings merge method allow squash rebase"
-— every one empty, 2m39s spent rephrasing before pivoting to `WebSearch` and leaving the
-claim unprobed anyway. The GitHub MCP server's tool roster is small and fixed (the
-deferred-tools listing at session start names all of it); one empty result there is already
-the answer for a capability search like this one — conclude "no read-only tool for this" and
-move on rather than trying keyword variations.
-
 ### Don't cite a not-yet-filed issue's number — comments here can't be edited afterward
 
 A session (#207, 2026-08-24) wrote "filed as a dedicated issue: #222" in a comment, then
@@ -114,9 +59,6 @@ then write anything that cites it — never guess ahead.
 
 ### Never publish an unverified fact about a real person
 
-When the primary source for a person's background is blocked, **do not substitute a
-data broker, and do not publish the claim with a caveat** — ask the owner.
-
 A session needed the founder's career history for the site's who-we-are section.
 `WebFetch` of his LinkedIn profile returned `403`, so the pass fell back to `WebSearch`
 and wrote employers and a degree onto a public marketing page from third-party
@@ -125,11 +67,8 @@ reply: *"zoominfo is wrong and rocketreach doesn't add anything"* — the facts 
 wrong, and the page had already shipped in a PR. Stripping them cost a second commit
 and an amended requirement.
 
-Flagging is not a substitute for verification here, because the cost is not a wrong
-paragraph — it is a public claim about a named person that they never made. The person
-is in the conversation; one question is cheaper than any research. (The site-specific
-form of this now sits in `product-wiki/product-requirements/` as a reviewed
-requirement; this rule is the general one, for any repo and any surface.)
+The site-specific form of this now sits in `product-wiki/product-requirements/` as a
+reviewed requirement.
 
 ## Site copy
 
